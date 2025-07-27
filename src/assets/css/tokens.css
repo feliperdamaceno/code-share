@@ -1,0 +1,30 @@
+/* Tier 1 Tokens */
+:root {
+  --container: 1200px;
+
+  /* Font */
+  --text-sm: clamp(0.8333rem, 0.7727rem + 0.303vw, 1rem);
+  --text-md: clamp(1rem, 0.9545rem + 0.2273vw, 1.125rem);
+  --text-lg: clamp(1.2rem, 1.1761rem + 0.1193vw, 1.2656rem);
+  --text-xl: clamp(1.4238rem, 1.4459rem + -0.0294vw, 1.44rem);
+  --text-2xl: clamp(1.6018rem, 1.7739rem + -0.2294vw, 1.728rem);
+  --text-3xl: clamp(1.802rem, 2.1724rem + -0.4938vw, 2.0736rem);
+  --text-4xl: clamp(2.0273rem, 2.656rem + -0.8382vw, 2.4883rem);
+}
+
+/* Tier 2 Tokens */
+:root {
+  /* Font */
+  --text-small: var(--text-sm);
+  --text-body: var(--text-md);
+  --text-heading-6: var(--text-md);
+  --text-heading-5: var(--text-lg);
+  --text-heading-4: var(--text-xl);
+  --text-heading-3: var(--text-2xl);
+  --text-heading-2: var(--text-3xl);
+  --text-heading-1: var(--text-4xl);
+}
+
+/* Tier 3 Tokens */
+:root {
+}
