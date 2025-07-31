@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'Archivo';
+  font-weight: 400;
+  src: url('/fonts/archivo/archivo-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Archivo';
+  font-weight: 500;
+  src: url('/fonts/archivo/archivo-medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Archivo';
+  font-weight: 600;
+  src: url('/fonts/archivo/archivo-semibold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Archivo';
+  font-weight: 700;
+  src: url('/fonts/archivo/archivo-bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-weight: 400;
+  src: url('/fonts/nunito/nunito-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-weight: 500;
+  src: url('/fonts/nunito/nunito-medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-weight: 600;
+  src: url('/fonts/nunito/nunito-semibold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-weight: 700;
+  src: url('/fonts/nunito/nunito-bold.woff2') format('woff2');
+}

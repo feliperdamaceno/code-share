@@ -1,4 +1,61 @@
-body {
+:where(*, *::before, *::after) {
+  color: var(--color-text);
+}
+
+:where(:focus-visible) {
+  outline-color: var(--color-focus);
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: 2px;
+}
+
+:where(body) {
   font-size: var(--text-body);
-  font-family: system-ui;
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-body);
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+}
+
+:where(h1) {
+  font-size: var(--text-heading-1);
+}
+
+:where(h2) {
+  font-size: var(--text-heading-2);
+}
+
+:where(h3) {
+  font-size: var(--text-heading-3);
+}
+
+:where(h4) {
+  font-size: var(--text-heading-4);
+}
+
+:where(h5) {
+  font-size: var(--text-heading-5);
+}
+
+:where(h6) {
+  font-size: var(--text-heading-6);
+}
+
+:where(a) {
+  color: var(--blue-4);
+  font-weight: var(--font-weight-medium);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.15em;
+  transition-property: text-decoration-color;
+  transition-timing-function: ease;
+  transition-duration: 125ms;
+}
+
+:where(a:hover) {
+  text-decoration-color: var(--color-accent-on-hover);
 }

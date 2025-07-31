@@ -1,6 +1,16 @@
-/* Tier 1 Tokens */
+/* Tier 1 */
 :root {
-  --container: 1200px;
+  /* Colors */
+  --dark-9: #141414;
+  --dark-7: #1f1f1f;
+  --dark-6: #292929;
+  --gray-5: #71717a;
+  --light-4: #c4c6c6;
+  --light-3: #e5e5e5;
+  --light-2: #fdfdfd;
+  --blue-5: #2a85d5;
+  --blue-4: #4292d9;
+  --red-5: #cc3629;
 
   /* Font */
   --text-sm: clamp(0.8333rem, 0.7727rem + 0.303vw, 1rem);
@@ -10,21 +20,71 @@
   --text-2xl: clamp(1.6018rem, 1.7739rem + -0.2294vw, 1.728rem);
   --text-3xl: clamp(1.802rem, 2.1724rem + -0.4938vw, 2.0736rem);
   --text-4xl: clamp(2.0273rem, 2.656rem + -0.8382vw, 2.4883rem);
+
+  /* Typography */
+  --font-family-nunito: 'Nunito', sans-serif;
+  --font-family-archivo: 'Archivo', sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-narrow: 1.1;
+  --line-height-regular: 1.6;
+
+  /* Size */
+  --size-xs: 0.25rem; /* 4px */
+  --size-sm: 0.5rem; /* 8px */
+  --size-md: 1rem; /* 16px */
+  --size-lg: 2rem; /* 32px */
+  --size-xl: 4rem; /* 64px */
+
+  /* Measurement */
+  --container-xxl: 1200px;
 }
 
-/* Tier 2 Tokens */
+/* Tier 2 */
 :root {
+  /* Colors */
+  --color-accent: var(--blue-4);
+  --color-accent-on-hover: var(--blue-5);
+  --color-text: var(--dark-9);
+  --color-text-on-dark: var(--light-2);
+  --color-danger: var(--red-5);
+  --color-focus: var(--blue-5);
+
   /* Font */
-  --text-small: var(--text-sm);
-  --text-body: var(--text-md);
-  --text-heading-6: var(--text-md);
-  --text-heading-5: var(--text-lg);
-  --text-heading-4: var(--text-xl);
-  --text-heading-3: var(--text-2xl);
-  --text-heading-2: var(--text-3xl);
   --text-heading-1: var(--text-4xl);
-}
+  --text-heading-2: var(--text-3xl);
+  --text-heading-3: var(--text-2xl);
+  --text-heading-4: var(--text-xl);
+  --text-heading-5: var(--text-lg);
+  --text-heading-6: var(--text-md);
+  --text-body: var(--text-md);
+  --text-small: var(--text-sm);
 
-/* Tier 3 Tokens */
-:root {
+  /* Typography */
+  --font-body: var(--font-family-nunito);
+  --font-heading: var(--font-family-archivo);
+  --font-weight-body: var(--font-weight-regular);
+  --font-weight-heading: var(--font-weight-medium);
+
+  /* Spacing */
+  --spacing-xs: var(--size-xs);
+  --spacing-sm: var(--size-sm);
+  --spacing-md: var(--size-md);
+  --spacing-lg: var(--size-lg);
+  --spacing-xl: var(--size-xl);
+
+  /* Border */
+  --border-xs: var(--size-xs);
+  --border-sm: var(--size-sm);
+  --border-md: var(--size-md);
+  --border-lg: var(--size-lg);
+  --border-xl: var(--size-xl);
+  --border-rounded: 999rem;
+
+  /* Measurement */
+  --site-container: var(--container-xxl);
 }
