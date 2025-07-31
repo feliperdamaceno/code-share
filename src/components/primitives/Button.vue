@@ -37,7 +37,7 @@ const styles: HTMLAttributes['class'] = {
 }
 
 .button.primary {
-  color: var(--light-2);
+  color: var(--color-text-on-dark);
   background-color: var(--dark-9);
   border-radius: var(--border-sm);
 }
@@ -59,7 +59,7 @@ const styles: HTMLAttributes['class'] = {
 }
 
 .button.secondary:hover {
-  color: var(--light-2);
+  color: var(--color-text-on-dark);
   background-color: var(--dark-6);
 }
 
@@ -68,7 +68,7 @@ const styles: HTMLAttributes['class'] = {
 }
 
 .button.accent {
-  color: var(--light-2);
+  color: var(--color-text-on-dark);
   background-color: var(--color-accent);
   border-radius: var(--border-sm);
 }
