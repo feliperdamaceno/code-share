@@ -1,6 +1,8 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
 import { fileURLToPath } from 'node:url'
+
+import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+import svgLoader from 'vite-svg-loader'
 
 export default defineConfig({
   server: {
@@ -12,5 +14,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  plugins: [vue()]
+  plugins: [vue(), svgLoader()]
 })
