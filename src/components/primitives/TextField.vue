@@ -52,7 +52,7 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 .textfield--base {
   display: grid;
   gap: var(--spacing-sm);
-  max-inline-size: 100%;
+  inline-size: 100%;
 }
 
 .input {

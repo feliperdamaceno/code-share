@@ -82,7 +82,7 @@ const onKeyDown = (event: KeyboardEvent) => {
   border-style: solid;
   display: flex;
   align-items: center;
-  max-inline-size: 100%;
+  inline-size: 100%;
 }
 
 :is(.search-button, .clear-button) {

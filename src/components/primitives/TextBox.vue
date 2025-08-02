@@ -66,7 +66,7 @@ const rows = computed(() => {
 .textbox--base {
   display: grid;
   gap: var(--spacing-sm);
-  max-inline-size: 100%;
+  inline-size: 100%;
 }
 
 .textbox {
