@@ -17,11 +17,9 @@ const {
   required = false
 } = defineProps<Props>()
 
-defineOptions({
-  inheritAttrs: false
-})
+defineOptions({ inheritAttrs: false })
 
-const value = defineModel<string>()
+const value = defineModel<string>({ default: '' })
 
 const slots = useSlots()
 const hasLabel = !!(label || slots.default)
@@ -43,8 +41,8 @@ const styles: HTMLAttributes['class'] = computed(() => ({
       :id="name"
       :name="name"
       :placeholder="placeholder"
-      :value="value"
       :required="required"
+      v-model="value"
       v-bind="$attrs"
     />
   </div>

@@ -17,11 +17,9 @@ const {
   value = 'on'
 } = defineProps<Props>()
 
-defineOptions({
-  inheritAttrs: false
-})
+defineOptions({ inheritAttrs: false })
 
-const checked = defineModel<boolean>()
+const checked = defineModel<boolean>({ default: false })
 
 const slots = useSlots()
 const hasLabel = !!(label || slots.default)

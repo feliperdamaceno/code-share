@@ -21,11 +21,9 @@ const {
   required = false
 } = defineProps<Props>()
 
-defineOptions({
-  inheritAttrs: false
-})
+defineOptions({ inheritAttrs: false })
 
-const value = defineModel<string>()
+const value = defineModel<string>({ default: '' })
 
 const slots = useSlots()
 const hasLabel = !!(label || slots.default)
@@ -54,9 +52,9 @@ const rows = computed(() => {
       :id="name"
       :name="name"
       :placeholder="placeholder"
-      :value="value"
       :required="required"
       :rows="rows"
+      v-model="value"
       v-bind="$attrs"
     >
     {{ value }}
