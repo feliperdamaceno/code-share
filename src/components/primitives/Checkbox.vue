@@ -36,7 +36,7 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 </script>
 
 <template>
-  <div class="base">
+  <div class="checkbox--base">
     <div class="checkbox" :class="styles">
       <input
         type="checkbox"
@@ -63,10 +63,10 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 </template>
 
 <style scoped>
-.base {
+.checkbox--base {
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  gap: var(--spacing-sm);
   max-inline-size: fit-content;
 }
 
