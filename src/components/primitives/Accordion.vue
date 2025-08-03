@@ -22,7 +22,12 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 </script>
 
 <template>
-  <details :class="styles" :open="open" @toggle="toggle">
+  <details
+    class="accordion--base"
+    :class="styles"
+    :open="open"
+    @toggle="toggle"
+  >
     <summary class="title">
       <span>{{ title }}</span>
 
@@ -39,6 +44,10 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 </template>
 
 <style scoped>
+.accordion--base {
+  inline-size: 100%;
+}
+
 .title {
   font-size: var(--text-lg);
   font-weight: var(--font-weight-semibold);
