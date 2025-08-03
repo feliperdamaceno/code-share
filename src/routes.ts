@@ -5,8 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/pages/Home.vue'
 
 export const routes: RouteRecordRaw[] = [
-  { name: 'Home', path: '/', component: Home },
-  { name: 'Another Home', path: '/home', component: Home }
+  { name: 'Home', path: '/', component: Home }
 ]
 
 export const router = createRouter({

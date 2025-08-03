@@ -70,6 +70,9 @@
   --font-weight-body: var(--font-weight-regular);
   --font-weight-heading: var(--font-weight-medium);
 
+  --line-height-heading: var(--line-height-narrow);
+  --line-height-body: var(--line-height-regular);
+
   /* Spacing */
   --spacing-xs: var(--size-xs);
   --spacing-sm: var(--size-sm);
@@ -86,5 +89,5 @@
   --border-rounded: 999rem;
 
   /* Measurement */
-  --site-container: var(--container-xxl);
+  --page-container: var(--container-xxl);
 }

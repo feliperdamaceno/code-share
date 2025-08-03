@@ -77,6 +77,7 @@ a:has(.brand) {
   background-color: transparent;
   padding-block: var(--spacing-sm);
   padding-inline: var(--spacing-sm);
+  margin-inline-end: calc(var(--spacing-sm) * -1);
   border-radius: var(--border-rounded);
   border: none;
   display: grid;
