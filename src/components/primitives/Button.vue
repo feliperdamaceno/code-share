@@ -27,19 +27,19 @@ const styles: HTMLAttributes['class'] = {
 
 <style scoped>
 .button {
-  font-weight: var(--font-weight-medium);
-  background-color: transparent;
   border: none;
+  background-color: transparent;
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
+  transition-duration: 125ms;
   transition-property: background-color;
   transition-timing-function: ease;
-  transition-duration: 125ms;
 }
 
 .button.primary {
-  color: var(--color-text-on-dark);
-  background-color: var(--dark-9);
   border-radius: var(--border-sm);
+  background-color: var(--dark-9);
+  color: var(--color-text-on-dark);
 }
 
 .button.primary:hover {
@@ -51,16 +51,16 @@ const styles: HTMLAttributes['class'] = {
 }
 
 .button.secondary {
-  border-color: var(--dark-6);
-  border-style: solid;
   border-width: 0.1em;
+  border-style: solid;
   border-radius: var(--border-rounded);
+  border-color: var(--dark-6);
   transition-property: color, background-color;
 }
 
 .button.secondary:hover {
-  color: var(--color-text-on-dark);
   background-color: var(--dark-6);
+  color: var(--color-text-on-dark);
 }
 
 .button.secondary:focus-visible {
@@ -68,9 +68,9 @@ const styles: HTMLAttributes['class'] = {
 }
 
 .button.accent {
-  color: var(--color-text-on-dark);
-  background-color: var(--color-accent);
   border-radius: var(--border-sm);
+  background-color: var(--color-accent);
+  color: var(--color-text-on-dark);
 }
 
 .button.accent:hover {
@@ -78,20 +78,20 @@ const styles: HTMLAttributes['class'] = {
 }
 
 .button.small {
-  font-size: var(--text-sm);
   padding-inline: var(--spacing-sm);
   padding-block: var(--spacing-xs);
+  font-size: var(--text-sm);
 }
 
 .button.medium {
-  font-size: var(--text-md);
   padding-inline: var(--spacing-md);
   padding-block: var(--spacing-sm);
+  font-size: var(--text-md);
 }
 
 .button.large {
-  font-size: var(--text-lg);
   padding-inline: var(--spacing-lg);
   padding-block: var(--spacing-md);
+  font-size: var(--text-lg);
 }
 </style>

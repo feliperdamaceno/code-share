@@ -36,34 +36,34 @@ const increase = () => {
 
 <style scoped>
 .counter--base {
-  background-color: var(--light-2);
-  padding-block: var(--spacing-xs);
-  border-color: var(--light-3);
-  border-width: 1px;
-  border-style: solid;
-  border-radius: var(--border-xs);
   display: flex;
   align-items: center;
   max-inline-size: fit-content;
+  padding-block: var(--spacing-xs);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--border-xs);
+  border-color: var(--light-3);
+  background-color: var(--light-2);
 }
 
 .value {
-  font-size: var(--text-lg);
-  border-inline-color: var(--light-3);
-  border-inline-width: 1px;
-  border-inline-style: solid;
   display: grid;
   place-items: center;
   min-inline-size: 3rem;
+  border-inline-color: var(--light-3);
+  border-inline-style: solid;
+  border-inline-width: 1px;
+  font-size: var(--text-lg);
 }
 
 :is(.decrease-button, .increase-button) {
+  display: grid;
   flex: 1;
-  background-color: transparent;
+  place-items: center;
   padding-inline: var(--spacing-sm);
   border: none;
-  display: grid;
-  place-items: center;
+  background-color: transparent;
   cursor: pointer;
 }
 

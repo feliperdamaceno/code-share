@@ -13,14 +13,14 @@
 }
 
 :where(ul[role='list'], ol[role='list']) {
-  list-style: none;
   margin-block: 0;
   padding-inline-start: 0;
+  list-style: none;
 }
 
 :where(body) {
-  margin: 0;
   min-height: 100vh;
+  margin: 0;
   line-height: var(--line-height-body);
 }
 
@@ -33,18 +33,18 @@
 }
 
 :where(a:not([class])) {
-  text-decoration-skip-ink: auto;
   color: currentColor;
+  text-decoration-skip-ink: auto;
 }
 
 :where(img, picture) {
-  max-width: 100%;
   display: block;
+  max-width: 100%;
 }
 
 :where(input, button, textarea, select) {
-  font-family: inherit;
   font-size: inherit;
+  font-family: inherit;
 }
 
 :where(textarea:not([rows])) {

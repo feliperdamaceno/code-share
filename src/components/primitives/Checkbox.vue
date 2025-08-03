@@ -64,20 +64,20 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 .checkbox--base {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
   max-inline-size: fit-content;
+  gap: var(--spacing-sm);
 }
 
 .checkbox {
   position: relative;
-  background-color: var(--light-2);
-  border-color: var(--light-3);
-  border-radius: var(--border-xs);
   border-width: 1px;
   border-style: solid;
+  border-radius: var(--border-xs);
+  border-color: var(--light-3);
+  background-color: var(--light-2);
+  transition-duration: 125ms;
   transition-property: border-color, background-color;
   transition-timing-function: ease;
-  transition-duration: 125ms;
 }
 
 .checkbox:has(> .input:focus-visible) {
@@ -88,12 +88,12 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 }
 
 .input {
+  z-index: 1;
+  position: absolute;
+  margin: 0;
+  inset: 0;
   cursor: pointer;
   opacity: 0;
-  margin: 0;
-  position: absolute;
-  inset: 0;
-  z-index: 1;
 }
 
 .is-checked {
@@ -112,9 +112,9 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 
 .checked-enter-active,
 .checked-leave-active {
+  transition-duration: 125ms;
   transition-property: opacity;
   transition-timing-function: ease;
-  transition-duration: 125ms;
 }
 
 .checked-enter-from,
@@ -124,8 +124,8 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 
 .label {
   color: var(--gray-5);
-  font-size: var(--text-md);
   font-weight: var(--font-weight-medium);
+  font-size: var(--text-md);
   cursor: pointer;
 }
 </style>

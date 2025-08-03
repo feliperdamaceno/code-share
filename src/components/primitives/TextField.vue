@@ -51,18 +51,18 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 <style scoped>
 .textfield--base {
   display: grid;
-  gap: var(--spacing-sm);
   inline-size: 100%;
+  gap: var(--spacing-sm);
 }
 
 .input {
   padding-inline: var(--spacing-md);
   padding-block: var(--spacing-sm);
-  background-color: var(--light-2);
-  border-color: var(--light-3);
-  border-radius: var(--border-xs);
   border-width: 1px;
   border-style: solid;
+  border-radius: var(--border-xs);
+  border-color: var(--light-3);
+  background-color: var(--light-2);
 }
 
 .is-required .label::before {
@@ -71,11 +71,11 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 }
 
 .label {
-  color: currentColor;
-  font-size: var(--text-md);
-  font-weight: var(--font-weight-medium);
   display: flex;
   gap: var(--spacing-sm);
+  color: currentColor;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-md);
   cursor: pointer;
 }
 </style>

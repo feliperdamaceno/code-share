@@ -89,5 +89,5 @@
   --border-rounded: 999rem;
 
   /* Measurement */
-  --page-container: var(--container-xxl);
+  --app-container: var(--container-xxl);
 }

@@ -31,11 +31,11 @@ import { routes } from '@/routes'
 .navigation--base {
   padding-inline: var(--spacing-md);
   padding-block: var(--spacing-sm);
-  background-color: var(--light-2);
-  border-color: var(--light-3);
-  border-radius: var(--border-rounded);
   border-width: 1px;
   border-style: solid;
+  border-radius: var(--border-rounded);
+  border-color: var(--light-3);
+  background-color: var(--light-2);
 }
 
 .navigation {
@@ -50,8 +50,8 @@ a:has(.brand) {
 }
 
 .brand {
-  font-size: var(--text-2xl);
   font-weight: var(--font-weight-semibold);
+  font-size: var(--text-2xl);
 }
 
 .link-list {
@@ -74,14 +74,14 @@ a:has(.brand) {
 }
 
 .shopping-button {
-  background-color: transparent;
-  padding-block: var(--spacing-sm);
-  padding-inline: var(--spacing-sm);
-  margin-inline-end: calc(var(--spacing-sm) * -1);
-  border-radius: var(--border-rounded);
-  border: none;
   display: grid;
   place-items: center;
+  margin-inline-end: calc(var(--spacing-sm) * -1);
+  padding-inline: var(--spacing-sm);
+  padding-block: var(--spacing-sm);
+  border: none;
+  border-radius: var(--border-rounded);
+  background-color: transparent;
   cursor: pointer;
 }
 

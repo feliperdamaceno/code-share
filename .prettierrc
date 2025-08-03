@@ -30,5 +30,9 @@
   ],
   "importOrderCaseSensitive": true,
   "importOrderParserPlugins": ["typescript", "decorators-legacy"],
-  "plugins": ["@ianvs/prettier-plugin-sort-imports"]
+  "cssDeclarationSorterOrder": "smacss",
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-css-order"
+  ]
 }

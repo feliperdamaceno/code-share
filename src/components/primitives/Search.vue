@@ -75,24 +75,24 @@ const onKeyDown = (event: KeyboardEvent) => {
 
 <style scoped>
 .search--base {
-  background-color: var(--light-2);
-  border-color: var(--light-3);
-  border-radius: var(--border-xs);
-  border-width: 1px;
-  border-style: solid;
   display: flex;
   align-items: center;
   inline-size: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--border-xs);
+  border-color: var(--light-3);
+  background-color: var(--light-2);
 }
 
 :is(.search-button, .clear-button) {
-  background-color: transparent;
-  padding-inline: var(--spacing-md);
-  padding-block: var(--spacing-sm);
-  border-radius: var(--border-xs);
-  border: none;
   display: grid;
   place-items: center;
+  padding-inline: var(--spacing-md);
+  padding-block: var(--spacing-sm);
+  border: none;
+  border-radius: var(--border-xs);
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -107,9 +107,9 @@ const onKeyDown = (event: KeyboardEvent) => {
 
 .clear-enter-active,
 .clear-leave-active {
+  transition-duration: 125ms;
   transition-property: opacity;
   transition-timing-function: ease;
-  transition-duration: 125ms;
 }
 
 .clear-enter-from,
@@ -118,11 +118,11 @@ const onKeyDown = (event: KeyboardEvent) => {
 }
 
 .search {
-  background-color: transparent;
   flex: 1;
   padding: 0;
-  border: none;
   padding-block: var(--spacing-sm);
+  border: none;
+  background-color: transparent;
 }
 
 .search:focus-visible {

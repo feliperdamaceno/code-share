@@ -49,12 +49,12 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 }
 
 .title {
-  font-size: var(--text-lg);
-  font-weight: var(--font-weight-semibold);
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
   justify-content: space-between;
+  gap: var(--spacing-md);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-lg);
   cursor: pointer;
 }
 
@@ -68,9 +68,9 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 }
 
 :is(.open-icon, .closed-icon) {
+  grid-area: 1 / 1;
   width: 2rem;
   height: 2rem;
-  grid-area: 1 / 1;
 }
 
 :is(.open-icon, .closed-icon) * {
@@ -80,9 +80,9 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 
 .toggle-enter-active,
 .toggle-leave-active {
+  transition-duration: 125ms;
   transition-property: opacity;
   transition-timing-function: ease;
-  transition-duration: 125ms;
 }
 
 .toggle-enter-from,
@@ -92,7 +92,7 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 
 .items {
   display: grid;
-  gap: var(--spacing-sm);
   margin-block-start: var(--spacing-sm);
+  gap: var(--spacing-sm);
 }
 </style>
