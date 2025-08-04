@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import CartSidebarController from '@/components/features/cart/CartSidebarController.vue'
 import Footer from '@/components/layout/Footer.vue'
 import Navigation from '@/components/layout/Navigation.vue'
 </script>
@@ -11,6 +12,8 @@ import Navigation from '@/components/layout/Navigation.vue'
   </main>
 
   <Footer />
+
+  <CartSidebarController />
 </template>
 
 <style scoped>
