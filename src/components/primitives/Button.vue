@@ -76,8 +76,10 @@ const styles: HTMLAttributes['class'] = {
   max-inline-size: fit-content;
   border: none;
   background-color: transparent;
+  color: currentColor;
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-narrow);
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
   transition-duration: 125ms;

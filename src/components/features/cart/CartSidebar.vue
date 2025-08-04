@@ -1,0 +1,178 @@
+<script setup lang="ts">
+import CartItem from '@/components/features/cart/CartItem.vue'
+import CouponsField from '@/components/features/cart/CouponsField.vue'
+import Button from '@/components/primitives/Button.vue'
+
+import { formatPrice } from '@/utils/ecomm'
+
+import CloseIcon from '@/assets/icons/close.svg'
+
+type CartProduct = {
+  src: string
+  title: string
+  price: number
+  quantity: number
+}
+
+const emit = defineEmits<{
+  close: []
+}>()
+
+const cart: CartProduct[] = []
+</script>
+
+<template>
+  <section class="cart-sidebar" role="dialog" aria-modal="true">
+    <div class="cart-header">
+      <h2 class="heading">Shopping Cart</h2>
+      <button class="close-button" @click="emit('close')">
+        <CloseIcon class="close-icon" aria-hidden="true" />
+      </button>
+    </div>
+
+    <div class="cart-items">
+      <ul v-if="cart.length" class="cart-items-list" role="list">
+        <li v-for="item in cart">
+          <CartItem
+            :src="item.src"
+            :title="item.title"
+            :price="item.price"
+            :quantity="item.quantity"
+          />
+        </li>
+      </ul>
+
+      <p v-else>Your cart is empty.</p>
+    </div>
+
+    <div class="cart-footer">
+      <hr class="divisor" />
+
+      <CouponsField />
+
+      <ul class="cart-information" role="list">
+        <li class="subtotal">
+          <span>Subtotal</span>
+          <span>{{ formatPrice({ value: 0 }) }}</span>
+        </li>
+
+        <li class="discount">
+          <span>Discount ({{ 0 }}%)</span>
+          <span>{{ formatPrice({ value: 0 }) }}</span>
+        </li>
+
+        <li class="total">
+          <strong>Total</strong>
+          <strong>{{ formatPrice({ value: 0 }) }}</strong>
+        </li>
+      </ul>
+
+      <Button href="#" class="checkout-button" variant="secondary">
+        Checkout
+      </Button>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.cart-sidebar {
+  display: flex;
+  z-index: 1000;
+  position: absolute;
+  flex-direction: column;
+  align-content: start;
+  inline-size: 100%;
+  max-inline-size: 500px;
+  inset: 0;
+  left: unset;
+  padding-inline: var(--spacing-lg);
+  padding-block: var(--spacing-lg);
+  gap: var(--spacing-md);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--light-3);
+  background-color: var(--light-2);
+  box-shadow: var(--shadow-lg);
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.cart-header .heading {
+  font-size: var(--text-xl);
+}
+
+.cart-header .close-button {
+  --button-spacing: var(--spacing-sm);
+
+  display: grid;
+  place-items: center;
+  margin-inline-end: calc(var(--button-spacing) * -1);
+  margin-block-start: calc(var(--button-spacing) * -1);
+  padding-inline: var(--button-spacing);
+  padding-block: var(--button-spacing);
+  border: none;
+  border-radius: var(--border-xs);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.cart-header .close-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.cart-items {
+  padding-inline-end: var(--spacing-sm);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.cart-items-list {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.cart-items-list > :not(:last-child) {
+  padding-block-end: var(--spacing-md);
+  border-block-end-color: var(--light-3);
+  border-block-end-style: solid;
+  border-block-end-width: 1px;
+}
+
+.cart-footer {
+  display: grid;
+  margin-block-start: auto;
+  gap: var(--spacing-md);
+}
+
+.divisor {
+  margin: 0;
+  border: none;
+  border-block-end-color: var(--light-3);
+  border-block-end-style: solid;
+  border-block-end-width: 1px;
+}
+
+.cart-information {
+  display: grid;
+  gap: var(--spacing-xs);
+}
+
+:is(.subtotal, .discount, .total) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-information .total {
+  font-size: var(--text-lg);
+}
+
+.checkout-button {
+  max-inline-size: 100%;
+}
+</style>

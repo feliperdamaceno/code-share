@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 import type { Coupon } from '@/types/cart'
 
 import Button from '@/components/primitives/Button.vue'

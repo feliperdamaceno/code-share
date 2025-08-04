@@ -20,6 +20,8 @@ import { routes } from '@/routes'
 
       <Transition>
         <button class="shopping-button" aria-label="open shopping cart">
+          <span class="visually-hidden" :aria-label="`cart has ${0} item`">
+          </span>
           <ShoppingBag class="shopping-cart-icon" aria-hidden="true" />
         </button>
       </Transition>
