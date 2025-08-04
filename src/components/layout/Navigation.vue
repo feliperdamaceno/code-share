@@ -56,7 +56,7 @@ a:has(.brand) {
 
 .link-list {
   display: flex;
-  align-items: baseline;
+  align-items: end;
   gap: var(--spacing-lg);
 }
 

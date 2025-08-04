@@ -5,7 +5,12 @@ import Button from '@/components/primitives/Button.vue'
 
 import { formatPrice } from '@/utils/ecomm'
 
-const { src, title, price, available } = defineProps<{
+const {
+  src = '',
+  title = '',
+  price,
+  available
+} = defineProps<{
   src: string
   title: string
   price: number
@@ -13,7 +18,6 @@ const { src, title, price, available } = defineProps<{
 }>()
 
 const invalidSrc = ref<boolean>(false)
-
 const isLongTitle = title.length >= 50
 </script>
 
@@ -55,7 +59,6 @@ const isLongTitle = title.length >= 50
 }
 
 .asset {
-  display: block;
   position: relative;
   aspect-ratio: 3/2;
   inline-size: 100%;

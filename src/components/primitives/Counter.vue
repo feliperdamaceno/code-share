@@ -4,19 +4,21 @@ import PlusIcon from '@/assets/icons/plus.svg'
 
 type Props = {
   label?: string
+  min?: number
+  max?: number
 }
 
-const { label = undefined } = defineProps<Props>()
+const { label = undefined, min = 0, max = 99 } = defineProps<Props>()
 
 const count = defineModel<number>({ default: 0 })
 
 const decrease = () => {
-  if (count.value <= 0) return
+  if (count.value <= min) return
   count.value--
 }
 
 const increase = () => {
-  if (count.value >= 99) return
+  if (count.value >= max) return
   count.value++
 }
 </script>
@@ -31,8 +33,8 @@ const increase = () => {
       class="count"
       type="number"
       name="count"
-      :min="0"
-      :max="99"
+      :min="min"
+      :max="max"
       v-model="count"
     />
 
