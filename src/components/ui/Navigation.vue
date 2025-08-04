@@ -19,7 +19,7 @@ import { routes } from '@/routes'
       </ul>
 
       <Transition>
-        <button class="shopping-button">
+        <button class="shopping-button" aria-label="open shopping cart">
           <ShoppingBag class="shopping-cart-icon" aria-hidden="true" />
         </button>
       </Transition>
