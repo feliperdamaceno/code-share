@@ -8,15 +8,16 @@ type Props = {
 
 const { label = undefined } = defineProps<Props>()
 
-const quantity = defineModel<number>({ default: 0 })
+const count = defineModel<number>({ default: 0 })
 
 const decrease = () => {
-  if (quantity.value <= 0) return
-  quantity.value--
+  if (count.value <= 0) return
+  count.value--
 }
 
 const increase = () => {
-  quantity.value++
+  if (count.value >= 99) return
+  count.value++
 }
 </script>
 
@@ -26,7 +27,14 @@ const increase = () => {
       <MinusIcon class="minus-icon" aria-hidden="true" />
     </button>
 
-    <span class="value">{{ quantity }}</span>
+    <input
+      class="count"
+      type="number"
+      name="count"
+      :min="0"
+      :max="99"
+      v-model="count"
+    />
 
     <button class="increase-button" @click="increase">
       <PlusIcon class="plus-icon" aria-hidden="true" />
@@ -39,7 +47,7 @@ const increase = () => {
   display: flex;
   align-items: center;
   max-inline-size: fit-content;
-  padding-block: var(--spacing-xs);
+  padding-block: 2px;
   border-width: 1px;
   border-style: solid;
   border-radius: var(--border-xs);
@@ -47,14 +55,28 @@ const increase = () => {
   background-color: var(--light-2);
 }
 
-.value {
+.count {
   display: grid;
   place-items: center;
-  min-inline-size: 3rem;
+  inline-size: 3rem;
+  padding-inline: unset;
+  padding-block: unset;
   border-inline-color: var(--light-3);
   border-inline-style: solid;
   border-inline-width: 1px;
-  font-size: var(--text-lg);
+  border-block: none;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-small);
+}
+
+.count::-webkit-outer-spin-button,
+.count::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.count {
+  -moz-appearance: textfield;
 }
 
 :is(.decrease-button, .increase-button) {
@@ -67,9 +89,13 @@ const increase = () => {
   cursor: pointer;
 }
 
+:is(.decrease-button, .increase-button):focus-visible {
+  outline-offset: -2px;
+}
+
 :is(.minus-icon, .plus-icon) {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 :is(.minus-icon, .plus-icon) * {
