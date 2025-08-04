@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import Footer from '@/components/ui/Footer.vue'
-import Navigation from '@/components/ui/Navigation.vue'
+import Footer from '@/components/layout/Footer.vue'
+import Navigation from '@/components/layout/Navigation.vue'
 </script>
 
 <template>

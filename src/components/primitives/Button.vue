@@ -71,8 +71,9 @@ const styles: HTMLAttributes['class'] = {
 
 <style scoped>
 .button {
-  display: block;
-  max-width: fit-content;
+  display: inline-block;
+  inline-size: 100%;
+  max-inline-size: fit-content;
   border: none;
   background-color: transparent;
   font-weight: var(--font-weight-medium);
