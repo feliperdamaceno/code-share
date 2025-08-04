@@ -2,12 +2,45 @@
 import type { HTMLAttributes } from 'vue'
 
 type Variants = 'primary' | 'secondary' | 'accent'
+
 type Sizes = 'small' | 'medium' | 'large'
 
-const { variant = 'primary', size = 'medium' } = defineProps<{
+type Type = 'button' | 'submit' | 'reset'
+
+type Rel =
+  | 'alternate'
+  | 'author'
+  | 'bookmark'
+  | 'external'
+  | 'help'
+  | 'license'
+  | 'next'
+  | 'nofollow'
+  | 'noreferrer'
+  | 'noopener'
+  | 'prev'
+  | 'search'
+  | 'tag'
+
+type Target = '_self' | '_blank' | '_parent' | '_top'
+
+const {
+  variant = 'primary',
+  size = 'medium',
+  type = 'button',
+  href = undefined,
+  rel = undefined,
+  target = undefined
+} = defineProps<{
   variant?: Variants
   size?: Sizes
+  type?: Type
+  href?: string
+  rel?: Rel
+  target?: Target
 }>()
+
+const isLink = href != null && href.length > 0
 
 const styles: HTMLAttributes['class'] = {
   ['primary']: variant === 'primary',
@@ -20,16 +53,31 @@ const styles: HTMLAttributes['class'] = {
 </script>
 
 <template>
-  <button class="button" :class="styles">
+  <a
+    v-if="isLink"
+    class="button"
+    :class="styles"
+    :href="href"
+    :rel="rel"
+    :target="target"
+  >
+    <slot></slot>
+  </a>
+
+  <button v-else class="button" :class="styles" :type="type">
     <slot></slot>
   </button>
 </template>
 
 <style scoped>
 .button {
+  display: block;
+  max-width: fit-content;
   border: none;
   background-color: transparent;
   font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-narrow);
+  text-decoration: none;
   cursor: pointer;
   transition-duration: 125ms;
   transition-property: background-color;
