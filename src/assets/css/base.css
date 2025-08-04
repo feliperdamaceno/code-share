@@ -66,14 +66,18 @@
 }
 
 :where(#app) {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns:
+    1fr
+    min(var(--app-container), calc(100% - var(--spacing-md) * 2))
+    1fr;
+  row-gap: var(--spacing-xl);
+  align-content: stretch;
+  align-items: start;
   min-height: 100vh;
-  inline-size: 100%;
-  max-inline-size: var(--app-container);
-  margin-inline: auto;
-  padding-inline: var(--spacing-md);
-  padding-block: var(--spacing-xl);
-  gap: var(--spacing-xl);
+  padding-block-start: var(--spacing-xl);
+}
+
+:where(#app) > * {
+  grid-column: 2;
 }
