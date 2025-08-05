@@ -28,6 +28,10 @@
 
 .fieldset {
   display: flex;
+  flex: 1;
+  inline-size: 0;
+  min-inline-size: 0;
+  margin-inline: 0;
   padding-inline: var(--spacing-sm);
   padding-block: var(--spacing-xs);
   border-width: 1px;
@@ -60,6 +64,7 @@
 .input {
   display: flex;
   justify-items: start;
+  inline-size: 100%;
   padding-inline-start: 0.25ch;
   padding-inline-end: var(--spacing-sm);
   padding-block: unset;
