@@ -16,7 +16,8 @@
 
 :where(body) {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  background-color: var(--light-2);
   font-weight: var(--font-weight-body);
   font-size: var(--text-body);
   font-family: var(--font-body);

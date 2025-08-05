@@ -5,7 +5,7 @@ import CartSidebar from '@/components/features/cart/CartSidebar.vue'
 <template>
   <Teleport to="body" aria-live="polite">
     <Transition name="sidebar">
-      <CartSidebar v-if="true" />
+      <CartSidebar v-if="false" />
     </Transition>
   </Teleport>
 </template>
