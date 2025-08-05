@@ -3,12 +3,12 @@
 <template>
   <div class="price-range">
     <fieldset class="fieldset">
-      <legend class="legend">From</legend>
+      <legend class="legend">from</legend>
       <input class="input" name="from" type="number" placeholder="100" />
     </fieldset>
 
     <fieldset class="fieldset">
-      <legend class="legend">To</legend>
+      <legend class="legend">to</legend>
       <input class="input" name="to" type="number" placeholder="1000" />
     </fieldset>
   </div>
