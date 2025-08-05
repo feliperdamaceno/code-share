@@ -1,70 +1,94 @@
 <script setup lang="ts">
-import { TransitionGroup, computed } from 'vue'
-
-import type { HTMLAttributes } from 'vue'
+import { TransitionGroup, ref } from 'vue'
 
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg'
 import ChevronUpIcon from '@/assets/icons/chevron-up.svg'
 
-defineProps<{
+const props = defineProps<{
   title: string
+  open?: boolean
 }>()
 
-const open = defineModel<boolean>({ default: false })
+const open = ref(props.open || false)
+const uuid = crypto.randomUUID()
 
-const toggle = () => {
-  open.value = !open.value
-}
-
-const styles: HTMLAttributes['class'] = computed(() => ({
-  ['is-opened']: open.value
-}))
+const toggle = () => (open.value = !open.value)
 </script>
 
 <template>
-  <details
-    class="accordion--base"
-    :class="styles"
-    :open="open"
-    @toggle="toggle"
-  >
-    <summary class="title">
+  <section class="accordion">
+    <button
+      class="heading"
+      :id="`heading-${uuid}`"
+      :aria-controls="`panel-${uuid}`"
+      :aria-expanded="open"
+      @click="toggle"
+    >
       <span>{{ title }}</span>
 
-      <TransitionGroup class="icons" name="toggle" tag="div">
+      <TransitionGroup class="icons" name="heading" tag="span">
         <ChevronUpIcon v-if="open" class="open-icon" aria-hidden="true" />
         <ChevronDownIcon v-else class="closed-icon" aria-hidden="true" />
       </TransitionGroup>
-    </summary>
+    </button>
 
-    <div class="items">
-      <slot></slot>
-    </div>
-  </details>
+    <Transition name="panel">
+      <div
+        :aria-labelledby="`heading-${uuid}`"
+        :id="`panel-${uuid}`"
+        class="panel"
+        role="region"
+        v-if="open"
+      >
+        <slot></slot>
+      </div>
+    </Transition>
+  </section>
 </template>
 
 <style scoped>
-.accordion--base {
+.accordion {
   inline-size: 100%;
 }
 
-.title {
+.heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  inline-size: 100%;
+  padding-inline: 0;
+  padding-block: 0;
   gap: var(--spacing-md);
+  border: 0;
+  background-color: transparent;
   font-weight: var(--font-weight-semibold);
   font-size: var(--text-lg);
   cursor: pointer;
 }
 
-.title::marker {
-  content: '';
-}
-
 .icons {
   display: grid;
   place-content: center;
+}
+
+:is(
+  .heading-enter-active,
+  .heading-leave-active,
+  .panel-enter-active,
+  .panel-leave-active
+) {
+  transition-duration: 125ms;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+:is(
+  .heading-enter-from,
+  .heading-leave-to,
+  .panel-enter-from,
+  .panel-leave-to
+) {
+  opacity: 0;
 }
 
 :is(.open-icon, .closed-icon) {
@@ -78,19 +102,7 @@ const styles: HTMLAttributes['class'] = computed(() => ({
   stroke-width: 1.5px;
 }
 
-.toggle-enter-active,
-.toggle-leave-active {
-  transition-duration: 125ms;
-  transition-property: opacity;
-  transition-timing-function: ease;
-}
-
-.toggle-enter-from,
-.toggle-leave-to {
-  opacity: 0;
-}
-
-.items {
+.panel {
   display: grid;
   margin-block-start: var(--spacing-sm);
   gap: var(--spacing-sm);
