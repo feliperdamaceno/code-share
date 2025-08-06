@@ -4,8 +4,5 @@ dev:
 build:
 	pnpm run build
 
-preview:
-	pnpm run preview
-
 format:
 	pnpm run format
