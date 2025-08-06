@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import ShoppingBag from '@/assets/icons/shopping-bag.svg'
 import { routes } from '@/routes'
+import { useCartSidebarStore, useCartStore } from '@/stores/cart'
+
+const sidebar = useCartSidebarStore()
+const cart = useCartStore()
 </script>
 
 <template>
@@ -19,8 +23,15 @@ import { routes } from '@/routes'
       </ul>
 
       <Transition>
-        <button class="shopping-button" aria-label="open shopping cart">
-          <span class="visually-hidden" :aria-label="`cart has ${0} item`">
+        <button
+          class="shopping-button"
+          aria-label="open shopping cart"
+          @click="sidebar.toggle"
+        >
+          <span
+            class="visually-hidden"
+            :aria-label="`cart has ${cart.size} item`"
+          >
           </span>
           <ShoppingBag class="shopping-cart-icon" aria-hidden="true" />
         </button>
