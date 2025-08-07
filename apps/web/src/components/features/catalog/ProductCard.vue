@@ -1,21 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import type { Product } from '@code-share/shared/types/product'
+
 import Button from '@/components/primitives/Button.vue'
 
 import { formatPrice } from '@/utils/ecomm'
 
-const {
-  src = '',
-  title = '',
-  price,
-  available
-} = defineProps<{
-  src: string
-  title: string
-  price: number
-  available: boolean
-}>()
+const { src = '', title = '', price, available } = defineProps<Product>()
 
 const invalidSrc = ref<boolean>(false)
 const isLongTitle = title.length >= 50

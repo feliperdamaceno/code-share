@@ -1,0 +1,27 @@
+{
+  "name": "@code-share/shared",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./types/product": {
+      "import": "./dist/types/product.mjs",
+      "require": "./dist/types/product.js",
+      "types": "./dist/types/product.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "nodemon --watch src --ext ts --exec 'pnpm run build'",
+    "build": "tsup"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "tsup": "^8.5.0",
+    "typescript": "~5.8.3"
+  }
+}

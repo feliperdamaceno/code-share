@@ -1,0 +1,22 @@
+{
+  "name": "@code-share/server",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch cmd/main.ts",
+    "build": "tsc",
+    "start": "node dist/cmd/main.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.18.1",
+    "hono": "^4.8.12"
+  },
+  "devDependencies": {
+    "@code-share/shared": "workspace:*",
+    "@ianvs/prettier-plugin-sort-imports": "^4.5.1",
+    "@types/node": "^20.11.17",
+    "prettier": "^3.6.2",
+    "tsx": "^4.7.1",
+    "typescript": "~5.8.3"
+  }
+}

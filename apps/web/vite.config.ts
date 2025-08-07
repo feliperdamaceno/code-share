@@ -5,6 +5,15 @@ import { defineConfig } from 'vite'
 import svgLoader from 'vite-svg-loader'
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  build: {
+    outDir: '../server/static',
+    emptyOutDir: true
+  },
   server: {
     host: '0.0.0.0',
     port: 3000,
@@ -12,10 +21,6 @@ export default defineConfig({
       ['/api']: 'http://localhost:5000'
     }
   },
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
+
   plugins: [vue(), svgLoader()]
 })

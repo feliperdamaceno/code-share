@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TransitionGroup, ref } from 'vue'
+import { ref } from 'vue'
 
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg'
 import ChevronUpIcon from '@/assets/icons/chevron-up.svg'
