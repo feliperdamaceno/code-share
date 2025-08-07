@@ -25,6 +25,7 @@
       "percentage": 25
     },
     "available": true,
+    "featured": true,
     "createdAt": 1743604200000
   },
   {
@@ -60,6 +61,7 @@
       "percentage": 0
     },
     "available": true,
+    "featured": false,
     "createdAt": 1750328040000
   },
   {
@@ -94,7 +96,8 @@
     "discount": {
       "percentage": 15
     },
-    "available": true,
+    "available": false,
+    "featured": false,
     "createdAt": 1737117926000
   },
   {
@@ -130,6 +133,7 @@
       "percentage": 0
     },
     "available": true,
+    "featured": true,
     "createdAt": 1751531627000
   },
   {
@@ -165,6 +169,7 @@
       "percentage": 5
     },
     "available": true,
+    "featured": true,
     "createdAt": 1748474157000
   }
 ]

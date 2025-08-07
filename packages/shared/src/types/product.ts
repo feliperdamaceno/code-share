@@ -12,5 +12,6 @@ export type Product = {
   price: number
   discount: Discount
   available: boolean
+  featured: boolean
   createdAt: number
 }

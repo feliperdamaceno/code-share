@@ -5,6 +5,10 @@ import { useCartSidebarStore, useCartStore } from '@/stores/cart'
 
 const sidebar = useCartSidebarStore()
 const cart = useCartStore()
+
+const links = routes
+  .map((route) => ({ name: route.name, path: route.path }))
+  .filter((route) => route.name)
 </script>
 
 <template>
@@ -14,10 +18,10 @@ const cart = useCartStore()
         <h1 class="brand">Code Share</h1>
       </RouterLink>
 
-      <ul class="link-list" role="list">
-        <li v-for="route in routes" :key="route.name">
-          <RouterLink class="link" exactActiveClass="active" :to="route.path">
-            {{ route.name }}
+      <ul v-if="links.length" class="link-list" role="list">
+        <li v-for="link in links" :key="link.name">
+          <RouterLink class="link" exactActiveClass="active" :to="link.path">
+            {{ link.name }}
           </RouterLink>
         </li>
       </ul>
