@@ -5,14 +5,27 @@
   "exports": {
     ".": {
       "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
+    },
+    "./types/assets": {
+      "source": "./src/types/assets.ts",
+      "types": "./dist/types/assets.d.ts",
+      "import": "./dist/types/assets.mjs",
+      "require": "./dist/types/assets.js"
+    },
+    "./types/ecomm": {
+      "source": "./src/types/ecomm.ts",
+      "types": "./dist/types/ecomm.d.ts",
+      "import": "./dist/types/ecomm.mjs",
+      "require": "./dist/types/ecomm.js"
     },
     "./types/product": {
+      "source": "./src/types/product.ts",
+      "types": "./dist/types/product.d.ts",
       "import": "./dist/types/product.mjs",
-      "require": "./dist/types/product.js",
-      "types": "./dist/types/product.d.ts"
+      "require": "./dist/types/product.js"
     }
   },
   "scripts": {

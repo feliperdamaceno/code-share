@@ -3,14 +3,7 @@ import type { RouterInstance } from '../types/core.types.js'
 
 import { Hono } from 'hono'
 
-const products: Product[] = [
-  {
-    src: 'https://picsum.photos/600/400',
-    title: 'Sample Product',
-    price: 49.9,
-    available: true
-  }
-]
+import data from '../../mock/data/products.json' with { type: 'json' }
 
 export class ProductsHandler {
   router: RouterInstance
@@ -18,9 +11,11 @@ export class ProductsHandler {
   constructor() {
     this.router = new Hono()
 
-    this.router.get('/', (ctx) => {
+    this.router.get('/', async (ctx) => {
+      const products: Product[] = data
+
       ctx.status(200)
-      return ctx.json(products)
+      return ctx.json({ data: products })
     })
   }
 }

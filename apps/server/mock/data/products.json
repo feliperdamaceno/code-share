@@ -1,0 +1,170 @@
+[
+  {
+    "id": "f2b5c9b2-3a84-4c7e-91f7-9b7d4c62f321",
+    "title": "Linux Fundamentals: The Complete Beginner's Guide",
+    "slug": "linux-fundamentals-the-complete-beginners-guide",
+    "description": "This practical course teaches you the essentials of Linux, from navigating the command line to managing users, permissions, and processes. Ideal for beginners and IT newcomers, you'll build a solid foundation to work confidently in any Linux-based environment, including servers and cloud platforms.",
+    "categories": [
+      {
+        "id": "8c3c1e74-35a7-4b14-a2a2-57bfa8db9c48",
+        "name": "Linux"
+      }
+    ],
+    "images": [
+      {
+        "id": "bb32a601-1ed6-4290-b0c0-9db58cbbcff6",
+        "src": "/api/mock/images/arch-laptop.jpg",
+        "alt": "a laptop closed with the arch linux logo",
+        "width": 1280,
+        "height": 960
+      }
+    ],
+    "author": "Alex Ramirez",
+    "price": 79.0,
+    "discount": {
+      "percentage": 25
+    },
+    "available": true,
+    "createdAt": 1743604200000
+  },
+  {
+    "id": "d87f1f4b-7a3c-4d4e-9e8f-0b2f6c924c39",
+    "title": "React Essentials: Build Interactive Web Apps",
+    "slug": "react-essentials-build-interactive-web-apps",
+    "description": "Learn to build fast, interactive web applications using React. This course covers components, state management, hooks, and modern development practices. Perfect for frontend developers looking to master one of the most in-demand JavaScript libraries used by companies worldwide.",
+    "categories": [
+      {
+        "id": "2f6b5d83-8c54-4b23-a67e-2ed5be7746e5",
+        "name": "Web Development"
+      }
+    ],
+    "images": [
+      {
+        "id": "53416a6e-b872-40fb-8329-369c21ee7f50",
+        "src": "/api/mock/images/girl-with-computer.jpg",
+        "alt": "girl in a sofa with a macbook on her lap",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "id": "bea7ad53-7966-4e16-92a2-69515dce1aca",
+        "src": "/api/mock/images/laptop-coding.jpg",
+        "alt": "macbook in a table with code editor opened in light theme",
+        "width": 1280,
+        "height": 960
+      }
+    ],
+    "author": "Samantha Lee",
+    "price": 89.0,
+    "discount": {
+      "percentage": 0
+    },
+    "available": true,
+    "createdAt": 1750328040000
+  },
+  {
+    "id": "a14e0c22-5d0c-4e07-bf6a-9f4e3b9d5a13",
+    "title": "Website Planning & Architecture: From Idea to Blueprint",
+    "slug": "website-planning-and-architecture-from-idea-to-blueprint",
+    "description": "Learn how to plan, structure, and organize a successful website project. This course covers goal setting, user research, content strategy, wireframing, and technical requirements—providing a solid foundation for developers, designers, and project managers involved in web development.",
+    "categories": [
+      {
+        "id": "9e77b3a6-2b5f-4ec1-b9ad-12132e748a4d",
+        "name": "Web Planning"
+      }
+    ],
+    "images": [
+      {
+        "id": "824f6351-3489-4f19-b757-975488942919",
+        "src": "/api/mock/images/plan-sketch-colorized.jpg",
+        "alt": "sketch on paper of website pages colorized by markers",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "id": "3b35f25c-9af0-48c2-8d46-05aa61d8cfb4",
+        "src": "/api/mock/images/plan-sketch.jpg",
+        "alt": "sketch on paper of website pages",
+        "width": 1280,
+        "height": 960
+      }
+    ],
+    "author": "Marcus Chen",
+    "price": 59.0,
+    "discount": {
+      "percentage": 15
+    },
+    "available": true,
+    "createdAt": 1737117926000
+  },
+  {
+    "id": "c6f91f99-3c4e-4e77-9443-8d6b8d2f230a",
+    "title": "Build a Personal Blog: A Complete Project Walkthrough",
+    "slug": "build-a-personal-blog-a-complete-project-walkthrough",
+    "description": "Follow along as you plan, design, and develop a personal blog from scratch. This project-based course covers everything from choosing a tech stack and setting up a CMS to customizing styles, deploying online, and optimizing for SEO—ideal for developers building their first portfolio project.",
+    "categories": [
+      {
+        "id": "2f6b5d83-8c54-4b23-a67e-2ed5be7746e5",
+        "name": "Web Development"
+      }
+    ],
+    "images": [
+      {
+        "id": "d4701cee-fbd6-4372-8039-649faa102a64",
+        "src": "/api/mock/images/close-macos-website.jpg",
+        "alt": "close look of a macbook in a table with an website opened",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "id": "f2a50fe6-8981-443e-9322-e4ea1cd52d09",
+        "src": "/api/mock/images/macos-website.jpg",
+        "alt": "a macbook in a table with an website opened",
+        "width": 1280,
+        "height": 960
+      }
+    ],
+    "author": "Daniel Rivera",
+    "price": 45.0,
+    "discount": {
+      "percentage": 0
+    },
+    "available": true,
+    "createdAt": 1751531627000
+  },
+  {
+    "id": "e23a9d0b-4b52-48f1-a721-51dca2efb6f4",
+    "title": "Mastering GitLab: Collaborate and Automate",
+    "slug": "mastering-gitlab-collaborate-and-automate",
+    "description": "Discover how to leverage GitLab for effective version control, team collaboration, and CI/CD automation. This course covers repository management, branching strategies, merge requests, pipelines, and access control, enabling developers and teams to streamline their DevOps workflows.",
+    "categories": [
+      {
+        "id": "b1f9d7fc-93f6-4dcb-a712-b6d3c2c9dfe4",
+        "name": "Version Control"
+      }
+    ],
+    "images": [
+      {
+        "id": "eb0f3bbe-1304-4d28-9a75-60895fce71d5",
+        "src": "/api/mock/images/gitlab-website.jpg",
+        "alt": "repository page in gitlab website",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "id": "cd69d4ac-083f-4530-903d-859fba1d1290",
+        "src": "/api/mock/images/data-center.jpg",
+        "alt": "room with servers in a data center",
+        "width": 1280,
+        "height": 960
+      }
+    ],
+    "author": "Jason Miller",
+    "price": 69.0,
+    "discount": {
+      "percentage": 5
+    },
+    "available": true,
+    "createdAt": 1748474157000
+  }
+]

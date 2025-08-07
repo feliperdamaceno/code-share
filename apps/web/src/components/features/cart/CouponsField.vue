@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Coupon } from '@/types/cart'
+import type { Coupon } from '@code-share/shared/types/ecomm'
 
 import Button from '@/components/primitives/Button.vue'
 import TextField from '@/components/primitives/TextField.vue'
