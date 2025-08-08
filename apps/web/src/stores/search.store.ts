@@ -10,6 +10,7 @@ export const useSearchStore = defineStore('catalog', () => {
   /* state */
   const filters = ref({
     search: '',
+    category: '',
     newest: false,
     featured: false
   })

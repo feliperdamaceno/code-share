@@ -1,31 +1,31 @@
 import { ref } from 'vue'
 
-import type { Product } from '@code-share/shared/types/product'
+import type { Category } from '@code-share/shared/types/ecomm'
 
 import { defineStore } from 'pinia'
 
-import { ProductRequest } from '@/requests/product.request'
+import { CategoryRequest } from '@/requests/category.request'
 
-export const useProductStore = defineStore('product', () => {
+export const useCategoryStore = defineStore('category', () => {
   /* state */
-  const data = ref<Map<'products', Product[]>>(new Map())
+  const data = ref<Map<'categories', Category[]>>(new Map())
   const loading = ref<boolean>(false)
   const error = ref<Error | null>(null)
 
   /* actions */
   async function load() {
-    if (data.value.has('products')) {
+    if (data.value.has('categories')) {
       if (revalidate()) {
         await fetch()
         timestamp.value = Date.now()
       }
 
-      return data.value.get('products') as Product[]
+      return data.value.get('categories') as Category[]
     }
 
     await fetch()
     timestamp.value = Date.now()
-    return data.value.get('products') as Product[]
+    return data.value.get('categories') as Category[]
   }
 
   /* private: state */
@@ -34,12 +34,12 @@ export const useProductStore = defineStore('product', () => {
   /* private: actions */
   function revalidate() {
     const elapsed = Date.now() - timestamp.value
-    return elapsed > 60_000 /* 60 sec */
+    return elapsed > 900_000 /* 15 min */
   }
 
   async function fetch() {
     loading.value = true
-    const [products, err] = await ProductRequest.getAllProducts()
+    const [categories, err] = await CategoryRequest.getAllCategories()
     loading.value = false
 
     if (err !== null) {
@@ -48,7 +48,7 @@ export const useProductStore = defineStore('product', () => {
       return
     }
 
-    data.value.set('products', products)
+    data.value.set('categories', categories)
   }
 
   return { data, loading, error, load }

@@ -1,7 +1,15 @@
 <script setup lang="ts">
+import { onBeforeMount } from 'vue'
+
 import PriceRange from '@/components/features/catalog/PriceRange.vue'
 import Accordion from '@/components/primitives/Accordion.vue'
 import Checkbox from '@/components/primitives/Checkbox.vue'
+
+import { useCategoryStore } from '@/stores/category.store'
+
+const categories = useCategoryStore()
+
+onBeforeMount(categories.load)
 </script>
 
 <template>
@@ -27,17 +35,27 @@ import Checkbox from '@/components/primitives/Checkbox.vue'
         <button class="reset-button">Clear</button>
       </div>
 
-      <Accordion title="Option" :open="true">
-        <p>Value</p>
-        <p>Value</p>
-        <p>Value</p>
-      </Accordion>
+      <p v-if="categories.loading">loading...</p>
+      <p class="error" v-else-if="categories.error">
+        {{ categories.error.message }}
+      </p>
 
-      <Accordion title="Option">
-        <p>Value</p>
-        <p>Value</p>
-        <p>Value</p>
-      </Accordion>
+      <div v-else class="categories">
+        <Accordion
+          v-for="(category, index) in categories.data.get('categories')"
+          :key="category.id"
+          :title="category.name"
+          :open="index === 0"
+        >
+          <button
+            class="option"
+            v-for="option in category.options"
+            :key="option.id"
+          >
+            {{ option.name }}
+          </button>
+        </Accordion>
+      </div>
     </div>
 
     <hr class="divisor" />
@@ -67,7 +85,7 @@ import Checkbox from '@/components/primitives/Checkbox.vue'
   background-color: var(--light-2);
 }
 
-.filter-section {
+:is(.filter-section, .categories) {
   display: grid;
   gap: var(--spacing-md);
 }
@@ -88,6 +106,23 @@ import Checkbox from '@/components/primitives/Checkbox.vue'
   font-weight: var(--font-weight-medium);
   font-size: var(--text-small);
   cursor: pointer;
+}
+
+.categories .option {
+  inline-size: fit-content;
+  padding-inline: 0;
+  padding-block: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.categories .option:not(:last-of-type) {
+  margin-bottom: var(--spacing-xs);
+}
+
+.error {
+  color: var(--color-danger);
 }
 
 .divisor {
