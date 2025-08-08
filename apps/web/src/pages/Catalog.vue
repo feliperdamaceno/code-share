@@ -5,6 +5,7 @@ import CatalogSearch from '@/components/features/catalog/CatalogSearch.vue'
 import CatalogSidebar from '@/components/features/catalog/CatalogSidebar.vue'
 import ProductCard from '@/components/features/catalog/ProductCard.vue'
 
+import LoadingIcon from '@/assets/icons/loading.svg'
 import { useProductStore } from '@/stores/product.store'
 
 const products = useProductStore()
@@ -22,7 +23,7 @@ onBeforeMount(products.load)
         label="catalog search"
       />
 
-      <p v-if="products.loading">Loading catalog...</p>
+      <LoadingIcon class="loading" v-if="products.loading" />
       <p v-if="products.error">{{ products.error.message }}</p>
 
       <div class="products">
@@ -70,5 +71,9 @@ onBeforeMount(products.load)
     minmax(min(var(--card-size), 100%), 1fr)
   );
   gap: var(--spacing-md);
+}
+
+.loading {
+  align-self: center;
 }
 </style>

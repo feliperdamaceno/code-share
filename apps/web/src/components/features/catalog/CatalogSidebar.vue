@@ -5,9 +5,12 @@ import PriceRange from '@/components/features/catalog/PriceRange.vue'
 import Accordion from '@/components/primitives/Accordion.vue'
 import Checkbox from '@/components/primitives/Checkbox.vue'
 
+import LoadingIcon from '@/assets/icons/loading.svg'
 import { useCategoryStore } from '@/stores/category.store'
+import { useSearchStore } from '@/stores/search.store'
 
 const categories = useCategoryStore()
+const search = useSearchStore()
 
 onBeforeMount(categories.load)
 </script>
@@ -35,7 +38,7 @@ onBeforeMount(categories.load)
         <button class="reset-button">Clear</button>
       </div>
 
-      <p v-if="categories.loading">loading...</p>
+      <LoadingIcon class="loading" v-if="categories.loading" />
       <p class="error" v-else-if="categories.error">
         {{ categories.error.message }}
       </p>
@@ -119,6 +122,10 @@ onBeforeMount(categories.load)
 
 .categories .option:not(:last-of-type) {
   margin-bottom: var(--spacing-xs);
+}
+
+.loading {
+  margin-inline: auto;
 }
 
 .error {
