@@ -38,6 +38,8 @@ onBeforeMount(products.load)
 
 <style scoped>
 .catalog {
+  --sidebar-size: 300px;
+
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
@@ -46,7 +48,7 @@ onBeforeMount(products.load)
 @media (min-width: 660px) {
   .catalog {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: min(var(--sidebar-size, 100%)) 1fr;
   }
 }
 
@@ -57,8 +59,13 @@ onBeforeMount(products.load)
 }
 
 .products {
+  --card-size: 260px;
+
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(275px, 100%), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(var(--card-size), 100%), 1fr)
+  );
   gap: var(--spacing-md);
 }
 </style>
