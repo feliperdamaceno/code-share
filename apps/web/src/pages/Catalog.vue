@@ -1,12 +1,15 @@
 <script setup lang="ts">
+import { onBeforeMount } from 'vue'
+
 import CatalogSidebar from '@/components/features/catalog/CatalogSidebar.vue'
 import ProductCard from '@/components/features/catalog/ProductCard.vue'
 import Search from '@/components/primitives/Search.vue'
 
 import { useProductStore } from '@/stores/product'
 
-const store = useProductStore()
-const products = store.getProducts('all')
+const products = useProductStore()
+
+onBeforeMount(products.load)
 </script>
 
 <template>
@@ -14,14 +17,14 @@ const products = store.getProducts('all')
     <CatalogSidebar class="sidebar" />
 
     <div class="content">
-      <Search />
+      <Search name="search" />
 
-      <p v-if="store.loading">Loading catalog...</p>
-      <p v-if="store.error">{{ store.error.message }}</p>
+      <p v-if="products.loading">Loading catalog...</p>
+      <p v-if="products.error">{{ products.error.message }}</p>
 
       <div class="products">
         <ProductCard
-          v-for="product in products"
+          v-for="product in products.data.get('products')"
           :key="product.id"
           :src="product.images[0].src"
           :title="product.title"

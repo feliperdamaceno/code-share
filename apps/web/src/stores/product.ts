@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 import type { Product } from '@code-share/shared/types/product'
 
@@ -6,55 +6,50 @@ import { defineStore } from 'pinia'
 
 import { ProductRequest } from '@/data/products'
 
-type ProductPayloads = 'all'
-
 export const useProductStore = defineStore('product', () => {
   /* state */
-  const products = ref<Map<ProductPayloads, Product[]>>(new Map([]))
+  const data = ref<Map<'products', Product[]>>(new Map())
   const loading = ref<boolean>(false)
   const error = ref<Error | null>(null)
 
-  /* state: private */
-  const timestamp = ref<number>(Date.now())
-
-  /* getters */
-  const getProducts = computed(() => {
-    return (payload: ProductPayloads): Product[] => {
-      if (revalidate.value) setProducts(payload)
-
-      if (products.value.has(payload)) {
-        return products.value.get(payload) as Product[]
+  /* actions */
+  async function load() {
+    if (data.value.has('products')) {
+      if (revalidate()) {
+        await fetch()
+        timestamp.value = Date.now()
       }
 
-      setProducts(payload)
-      return products.value.get(payload) as Product[]
+      return data.value.get('products') as Product[]
     }
-  })
 
-  /* getters: private */
-  const revalidate = computed(() => {
+    await fetch()
+    timestamp.value = Date.now()
+    return data.value.get('products') as Product[]
+  }
+
+  /* private: state */
+  const timestamp = ref(Date.now())
+
+  /* private: actions */
+  function revalidate() {
     const elapsed = Date.now() - timestamp.value
-    return elapsed > 60000 /* 60 seconds */
-  })
+    return elapsed > 60000 /* 10s */
+  }
 
-  /* actions: private */
-  const setProducts = async (payload: ProductPayloads) => {
+  async function fetch() {
     loading.value = true
-    const [data, err] = await ProductRequest.getAllProducts()
+    const [products, err] = await ProductRequest.getAllProducts()
     loading.value = false
 
     if (err !== null) {
-      console.error(err)
-      return (error.value = err)
+      error.value = err
+      console.error(error.value)
+      return
     }
 
-    products.value.set(payload, data)
-    timestamp.value = Date.now()
+    data.value.set('products', products)
   }
 
-  return {
-    loading,
-    error,
-    getProducts
-  }
+  return { data, loading, error, load }
 })

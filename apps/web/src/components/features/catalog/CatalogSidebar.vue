@@ -47,8 +47,8 @@ import Checkbox from '@/components/primitives/Checkbox.vue'
         <h2 class="heading">Filter By:</h2>
       </div>
 
-      <Checkbox>Newest</Checkbox>
-      <Checkbox>Featured</Checkbox>
+      <Checkbox name="newest">Newest</Checkbox>
+      <Checkbox name="featured">Featured</Checkbox>
     </div>
   </section>
 </template>
