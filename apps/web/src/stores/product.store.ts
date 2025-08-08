@@ -4,7 +4,7 @@ import type { Product } from '@code-share/shared/types/product'
 
 import { defineStore } from 'pinia'
 
-import { ProductRequest } from '@/data/products'
+import { ProductRequest } from '@/requests/product.request'
 
 export const useProductStore = defineStore('product', () => {
   /* state */

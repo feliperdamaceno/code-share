@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CartSidebar from '@/components/features/cart/CartSidebar.vue'
 
-import { useCartSidebarStore } from '@/stores/cart'
+import { useCartSidebarStore } from '@/stores/cart.store'
 
 const sidebar = useCartSidebarStore()
 </script>

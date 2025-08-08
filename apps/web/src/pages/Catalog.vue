@@ -5,7 +5,7 @@ import CatalogSidebar from '@/components/features/catalog/CatalogSidebar.vue'
 import ProductCard from '@/components/features/catalog/ProductCard.vue'
 import Search from '@/components/primitives/Search.vue'
 
-import { useProductStore } from '@/stores/product'
+import { useProductStore } from '@/stores/product.store'
 
 const products = useProductStore()
 

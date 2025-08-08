@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ShoppingBag from '@/assets/icons/shopping-bag.svg'
 import { routes } from '@/routes'
-import { useCartSidebarStore, useCartStore } from '@/stores/cart'
+import { useCartSidebarStore, useCartStore } from '@/stores/cart.store'
 
 const sidebar = useCartSidebarStore()
 const cart = useCartStore()
