@@ -1,9 +1,61 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CatalogSidebar from '@/components/features/catalog/CatalogSidebar.vue'
+import ProductCard from '@/components/features/catalog/ProductCard.vue'
+import Search from '@/components/primitives/Search.vue'
+
+import { useProductStore } from '@/stores/product'
+
+const store = useProductStore()
+const products = store.getProducts('all')
+</script>
 
 <template>
-  <section>
-    <h2>Catalog</h2>
+  <section class="catalog">
+    <CatalogSidebar class="sidebar" />
+
+    <div class="content">
+      <Search />
+
+      <p v-if="store.loading">Loading catalog...</p>
+      <p v-if="store.error">{{ store.error.message }}</p>
+
+      <div class="products">
+        <ProductCard
+          v-for="product in products"
+          :key="product.id"
+          :src="product.images[0].src"
+          :title="product.title"
+          :price="product.price"
+          :available="product.available"
+        />
+      </div>
+    </div>
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 660px) {
+  .catalog {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(275px, 100%), 1fr));
+  gap: var(--spacing-md);
+}
+</style>

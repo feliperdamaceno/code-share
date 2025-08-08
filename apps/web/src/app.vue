@@ -20,7 +20,6 @@ import Navigation from '@/components/layout/Navigation.vue'
 .content {
   display: grid;
   flex: 1;
-  padding-inline: var(--spacing-md);
   gap: var(--spacing-xl);
 }
 </style>

@@ -60,7 +60,7 @@ const isLongTitle = title.length >= 50
 
 .asset {
   position: relative;
-  aspect-ratio: 3/2;
+  aspect-ratio: 4/2;
   inline-size: 100%;
   object-fit: cover;
   background-color: var(--dark-6);
