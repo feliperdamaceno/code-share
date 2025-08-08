@@ -1,39 +1,21 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-
 import CloseIcon from '@/assets/icons/close.svg'
 import SearchIcon from '@/assets/icons/search.svg'
+import { useSearchStore } from '@/stores/search.store'
 
 type Props = {
-  name?: string
   placeholder?: string
-  path?: string
   label?: string
 }
 
-const {
-  name = 'search',
-  placeholder = undefined,
-  path = '/',
-  label = undefined
-} = defineProps<Props>()
+const { placeholder = undefined, label = undefined } = defineProps<Props>()
 
 defineOptions({ inheritAttrs: false })
 
-const router = useRouter()
-const query = defineModel<string>({ default: '' })
-
-const search = () => {
-  router.push({ path, query: { [name]: query.value } })
-}
-
-const clear = () => {
-  query.value = ''
-  router.push({ path, replace: true })
-}
+const search = useSearchStore()
 
 const onKeyDown = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') search()
+  if (event.key === 'Enter') search.submit()
 }
 </script>
 
@@ -43,7 +25,7 @@ const onKeyDown = (event: KeyboardEvent) => {
       type="submit"
       class="search-button"
       aria-label="submit search"
-      @click="search"
+      @click="search.submit"
     >
       <SearchIcon class="search-icon" aria-hidden="true" />
     </button>
@@ -51,21 +33,21 @@ const onKeyDown = (event: KeyboardEvent) => {
     <input
       type="search"
       class="search"
-      :id="name"
-      :name="name"
+      id="search"
+      name="search"
       :placeholder="placeholder"
       :aria-label="label"
-      v-model="query"
+      v-model="search.filters.search"
       @keydown="onKeyDown"
       v-bind="$attrs"
     />
 
     <Transition name="clear">
       <button
-        v-if="query.length > 0"
+        v-if="search.filters.search.length > 0"
         class="clear-button"
         aria-label="clear search input"
-        @click="clear"
+        @click="search.clearSearch"
       >
         <CloseIcon class="clear-icon" aria-hidden="true" />
       </button>

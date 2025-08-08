@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onBeforeMount } from 'vue'
 
+import CatalogSearch from '@/components/features/catalog/CatalogSearch.vue'
 import CatalogSidebar from '@/components/features/catalog/CatalogSidebar.vue'
 import ProductCard from '@/components/features/catalog/ProductCard.vue'
-import Search from '@/components/primitives/Search.vue'
 
 import { useProductStore } from '@/stores/product.store'
 
@@ -17,7 +17,10 @@ onBeforeMount(products.load)
     <CatalogSidebar class="sidebar" />
 
     <div class="content">
-      <Search name="search" />
+      <CatalogSearch
+        placeholder="Search through our courses..."
+        label="catalog search"
+      />
 
       <p v-if="products.loading">Loading catalog...</p>
       <p v-if="products.error">{{ products.error.message }}</p>
