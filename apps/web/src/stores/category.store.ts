@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 
 import type { Category } from '@code-share/shared/types/ecomm'
 
@@ -9,8 +9,8 @@ import { CategoryRequest } from '@/requests/category.request'
 export const useCategoryStore = defineStore('category', () => {
   /* state */
   const data = ref<Map<'categories', Category[]>>(new Map())
-  const loading = ref<boolean>(false)
-  const error = ref<Error | null>(null)
+  const loading = shallowRef<boolean>(false)
+  const error = shallowRef<Error | null>(null)
 
   /* actions */
   async function load() {
@@ -29,7 +29,7 @@ export const useCategoryStore = defineStore('category', () => {
   }
 
   /* private: state */
-  const timestamp = ref(Date.now())
+  const timestamp = shallowRef(Date.now())
 
   /* private: actions */
   function revalidate() {

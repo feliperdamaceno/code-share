@@ -10,7 +10,7 @@ import { useProductStore } from '@/stores/product.store'
 
 const products = useProductStore()
 
-onBeforeMount(products.load)
+onBeforeMount(() => products.load())
 </script>
 
 <template>

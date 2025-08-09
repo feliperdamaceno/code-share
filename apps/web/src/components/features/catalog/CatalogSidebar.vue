@@ -12,7 +12,7 @@ import { useSearchStore } from '@/stores/search.store'
 const categories = useCategoryStore()
 const search = useSearchStore()
 
-onBeforeMount(categories.load)
+onBeforeMount(() => categories.load())
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 
 import type { Product } from '@code-share/shared/types/product'
 
@@ -9,8 +9,8 @@ import { ProductRequest } from '@/requests/product.request'
 export const useProductStore = defineStore('product', () => {
   /* state */
   const data = ref<Map<'products', Product[]>>(new Map())
-  const loading = ref<boolean>(false)
-  const error = ref<Error | null>(null)
+  const loading = shallowRef<boolean>(false)
+  const error = shallowRef<Error | null>(null)
 
   /* actions */
   async function load() {
@@ -29,7 +29,7 @@ export const useProductStore = defineStore('product', () => {
   }
 
   /* private: state */
-  const timestamp = ref(Date.now())
+  const timestamp = shallowRef(Date.now())
 
   /* private: actions */
   function revalidate() {
