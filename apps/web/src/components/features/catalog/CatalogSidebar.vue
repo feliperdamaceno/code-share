@@ -68,8 +68,10 @@ onBeforeMount(() => categories.load())
         <h2 class="heading">Filter By:</h2>
       </div>
 
-      <Checkbox name="newest">Newest</Checkbox>
-      <Checkbox name="featured">Featured</Checkbox>
+      <Checkbox name="newest" v-model="search.filters.newest">Newest</Checkbox>
+      <Checkbox name="featured" v-model="search.filters.featured">
+        Featured
+      </Checkbox>
     </div>
   </section>
 </template>

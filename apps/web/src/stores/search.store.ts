@@ -1,5 +1,7 @@
 import { ref, watch } from 'vue'
 
+import type { LocationQueryRaw } from 'vue-router'
+
 import { defineStore } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -17,23 +19,46 @@ export const useSearchStore = defineStore('catalog', () => {
 
   /* actions */
   const submit = () => {
-    router.push({
-      path: route.path,
-      query: {
-        ['search']: filters.value.search,
-        ...route.query
-      }
-    })
+    const queries = getQueries()
+    router.replace({ query: queries as LocationQueryRaw })
   }
+
+  watch(
+    () => filters.value.newest,
+    () => {
+      if (filters.value.newest === false) return
+      const { ['newest']: _, ...queries } = route.query
+      router.replace({ query: { ...queries } })
+    }
+  )
+
+  watch(
+    () => filters.value.featured,
+    () => {
+      if (filters.value.featured === false) return
+      const { ['featured']: _, ...queries } = route.query
+      router.replace({ query: { ...queries } })
+    }
+  )
 
   function clearSearch() {
     filters.value.search = ''
-    const { ['search']: removed, ...queries } = route.query
-    router.push({ path: '/catalog', query: { ...queries }, replace: true })
+    const { ['search']: _, ...queries } = route.query
+    router.replace({ query: { ...queries } })
   }
 
-  /* when query is empty,"search" query should be removed from URL */
-  watch(filters.value, () => filters.value.search.length <= 0 && clearSearch())
+  /* private: actions */
+  function getQueries() {
+    const queries = Object.entries(filters.value)
+    return queries.reduce(
+      (result, [key, value]) => {
+        if (!value) return result
+        result[key] = value
+        return result
+      },
+      {} as Record<string, unknown>
+    )
+  }
 
   return { filters, submit, clearSearch }
 })
