@@ -27,7 +27,6 @@ const catalog = useCatalogStore()
       <div class="products">
         <ProductCard
           v-for="product in catalog.products"
-          class="product"
           :key="product.id"
           :src="product.images[0].src"
           :title="product.title"
@@ -79,10 +78,6 @@ const catalog = useCatalogStore()
   .products {
     --columns: 3;
   }
-}
-
-.product {
-  max-inline-size: var(--card-size);
 }
 
 .loading {
