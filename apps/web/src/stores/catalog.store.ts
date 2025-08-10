@@ -17,6 +17,8 @@ export const useCatalogStore = defineStore('catalog', () => {
 
   /* state */
   const filters = reactive({
+    ['price-from']: Number(route.query['price-from'] || 0),
+    ['price-to']: Number(route.query['price-to'] || 0),
     search: String(route.query['search'] || ''),
     category: String(route.query['category'] || ''),
     newest: toBool(route.query['newest']),
@@ -32,12 +34,13 @@ export const useCatalogStore = defineStore('catalog', () => {
   }
 
   type FilterKeys = keyof typeof filters
-  function removeQuery(key: FilterKeys) {
-    const { [key]: _, ...queries } = route.query
-    router.push({ query: { ...queries } })
+  function removeQuery(keys: FilterKeys[]) {
+    const queries = { ...route.query }
+    keys.forEach((key) => delete queries[key])
+    router.push({ query: queries })
   }
 
-  /* filters should only be kept withing the catalog route */
+  /* watchers */
   watch(
     () => route.path,
     () => {

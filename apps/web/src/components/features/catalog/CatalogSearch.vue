@@ -20,7 +20,7 @@ const submit = () => {
 
 const clear = () => {
   catalog.filters.search = ''
-  catalog.removeQuery('search')
+  catalog.removeQuery(['search'])
 }
 
 const onKeyDown = (event: KeyboardEvent) => {

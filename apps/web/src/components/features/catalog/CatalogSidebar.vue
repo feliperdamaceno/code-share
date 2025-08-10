@@ -14,6 +14,12 @@ const catalog = useCatalogStore()
 
 onBeforeMount(() => categories.load())
 
+function resetPrice() {
+  catalog.filters['price-from'] = 0
+  catalog.filters['price-to'] = 0
+  catalog.removeQuery(['price-from', 'price-to'])
+}
+
 function selectCategory(category: string) {
   catalog.filters.category = category
   catalog.addQuery({ category: category })
@@ -21,14 +27,14 @@ function selectCategory(category: string) {
 
 function resetCategory() {
   catalog.filters.category = ''
-  catalog.removeQuery('category')
+  catalog.removeQuery(['category'])
 }
 
 watch(
   () => catalog.filters.newest,
   (value) => {
     if (value) return catalog.addQuery({ newest: value })
-    catalog.removeQuery('newest')
+    catalog.removeQuery(['newest'])
   }
 )
 
@@ -36,7 +42,7 @@ watch(
   () => catalog.filters.featured,
   (value) => {
     if (value) return catalog.addQuery({ featured: value })
-    catalog.removeQuery('featured')
+    catalog.removeQuery(['featured'])
   }
 )
 </script>
@@ -50,7 +56,7 @@ watch(
     <div class="filter-section">
       <div class="heading-group">
         <h2 class="heading">Price</h2>
-        <button class="reset-button">Reset</button>
+        <button class="reset-button" @click="resetPrice">Reset</button>
       </div>
 
       <PriceRange />

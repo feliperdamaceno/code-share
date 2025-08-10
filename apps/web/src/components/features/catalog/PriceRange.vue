@@ -1,15 +1,61 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from 'vue'
+
+import { useCatalogStore } from '@/stores/catalog.store'
+
+const catalog = useCatalogStore()
+
+const priceFrom = computed({
+  get() {
+    const value = catalog.filters['price-from']
+    return value > 0 ? value : undefined
+  },
+  set(value: number | undefined) {
+    value = Number(value || 0)
+    const from = value <= 0 ? 0 : value
+
+    catalog.addQuery({ ['price-from']: from })
+    catalog.filters['price-from'] = from
+  }
+})
+
+const priceTo = computed({
+  get() {
+    const value = catalog.filters['price-to']
+    return value > 0 ? value : undefined
+  },
+  set(value: number | undefined) {
+    value = Number(value || 0)
+    const to = value <= 0 ? 0 : value
+
+    catalog.addQuery({ ['price-to']: to })
+    catalog.filters['price-to'] = to
+  }
+})
+</script>
 
 <template>
   <div class="price-range">
     <fieldset class="fieldset">
       <legend class="legend">from</legend>
-      <input class="input" name="from" type="number" placeholder="100" />
+      <input
+        class="input"
+        name="from"
+        type="number"
+        placeholder="100"
+        v-model="priceFrom"
+      />
     </fieldset>
 
     <fieldset class="fieldset">
       <legend class="legend">to</legend>
-      <input class="input" name="to" type="number" placeholder="1000" />
+      <input
+        class="input"
+        name="to"
+        type="number"
+        placeholder="1000"
+        v-model="priceTo"
+      />
     </fieldset>
   </div>
 </template>
