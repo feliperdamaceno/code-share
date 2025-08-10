@@ -1,9 +1,15 @@
-import { reactive, watchEffect } from 'vue'
+import { reactive, watch } from 'vue'
 
 import type { LocationQueryRaw } from 'vue-router'
 
 import { defineStore } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
+
+type Query<Filters> = {
+  [Key in keyof Filters]?: Filters[Key]
+}
+
+const toBool = (value: unknown) => value === 'true' || value === true
 
 export const useCatalogStore = defineStore('catalog', () => {
   const route = useRoute()
@@ -11,42 +17,57 @@ export const useCatalogStore = defineStore('catalog', () => {
 
   /* state */
   const filters = reactive({
-    search: route.query['search'] || '',
-    category: route.query['category'] || '',
-    newest: Boolean(route.query['newest']) || false,
-    featured: Boolean(route.query['featured']) || false
+    search: String(route.query['search'] || ''),
+    category: String(route.query['category'] || ''),
+    newest: toBool(route.query['newest']),
+    featured: toBool(route.query['featured'])
   })
 
   /* actions */
-  function submitSearch() {
-    addQuery({ ['search']: filters.search })
+  type Filters = typeof filters
+  function addQuery(query: Query<Filters>) {
+    router.push({
+      query: { ...route.query, ...(query as LocationQueryRaw) }
+    })
   }
 
-  function clearSearch() {
-    filters.search = ''
-    removeQuery('search')
-  }
-
-  /* private: actions */
-  function addQuery(query: LocationQueryRaw) {
-    router.replace({ query: { ...route.query, ...query } })
-  }
-
-  function removeQuery(key: string) {
+  type FilterKeys = keyof typeof filters
+  function removeQuery(key: FilterKeys) {
     const { [key]: _, ...queries } = route.query
-    router.replace({ query: { ...queries } })
+    router.push({ query: { ...queries } })
   }
 
   /* watchers */
-  watchEffect(() => {
-    if (filters.newest === false) return removeQuery('newest')
-    addQuery({ ['newest']: String(filters.newest) })
-  })
+  watch(
+    () => filters.newest,
+    (value) => {
+      if (value) return addQuery({ ['newest']: value })
+      removeQuery('newest')
+    }
+  )
 
-  watchEffect(() => {
-    if (filters.featured === false) return removeQuery('featured')
-    addQuery({ ['featured']: String(filters.featured) })
-  })
+  watch(
+    () => filters.featured,
+    (value) => {
+      if (value) return addQuery({ ['featured']: value })
+      removeQuery('featured')
+    }
+  )
 
-  return { filters, submitSearch, clearSearch }
+  /* filters should only be kept withing the catalog route */
+  watch(
+    () => route.path,
+    () => {
+      /* clear all queries */
+      router.replace({ query: {} })
+
+      /* reset all filters */
+      filters.search = ''
+      filters.category = ''
+      filters.newest = false
+      filters.featured = false
+    }
+  )
+
+  return { filters, addQuery, removeQuery }
 })

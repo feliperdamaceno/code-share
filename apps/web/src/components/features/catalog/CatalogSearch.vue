@@ -14,8 +14,17 @@ defineOptions({ inheritAttrs: false })
 
 const catalog = useCatalogStore()
 
+const submit = () => {
+  catalog.addQuery({ ['search']: catalog.filters.search })
+}
+
+const clear = () => {
+  catalog.filters.search = ''
+  catalog.removeQuery('search')
+}
+
 const onKeyDown = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') catalog.submitSearch()
+  if (event.key === 'Enter') submit()
 }
 </script>
 
@@ -25,7 +34,7 @@ const onKeyDown = (event: KeyboardEvent) => {
       type="submit"
       class="search-button"
       aria-label="submit search"
-      @click="catalog.submitSearch"
+      @click="submit"
     >
       <SearchIcon class="search-icon" aria-hidden="true" />
     </button>
@@ -47,7 +56,7 @@ const onKeyDown = (event: KeyboardEvent) => {
         v-if="catalog.filters.search.length > 0"
         class="clear-button"
         aria-label="clear search input"
-        @click="catalog.clearSearch"
+        @click="clear"
       >
         <CloseIcon class="clear-icon" aria-hidden="true" />
       </button>
