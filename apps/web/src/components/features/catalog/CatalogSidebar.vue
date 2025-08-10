@@ -104,7 +104,7 @@ watch(
       </div>
 
       <Checkbox name="newest" v-model="filters.options.newest">
-        Newest
+        Newest (30 Days)
       </Checkbox>
 
       <Checkbox name="featured" v-model="filters.options.featured">

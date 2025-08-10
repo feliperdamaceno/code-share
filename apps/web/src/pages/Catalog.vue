@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { onBeforeMount } from 'vue'
-
 import CatalogSearch from '@/components/features/catalog/CatalogSearch.vue'
 import CatalogSidebar from '@/components/features/catalog/CatalogSidebar.vue'
 import ProductCard from '@/components/features/catalog/ProductCard.vue'
 
 import LoadingIcon from '@/assets/icons/loading.svg'
+import { useCatalogStore } from '@/stores/catalog.store'
 import { useProductStore } from '@/stores/product.store'
 
 const products = useProductStore()
-
-onBeforeMount(() => products.load())
+const catalog = useCatalogStore()
 </script>
 
 <template>
@@ -28,7 +26,7 @@ onBeforeMount(() => products.load())
 
       <div class="products">
         <ProductCard
-          v-for="product in products.data.get('products')"
+          v-for="product in catalog.products"
           :key="product.id"
           :src="product.images[0].src"
           :title="product.title"
