@@ -24,7 +24,12 @@ const catalog = useCatalogStore()
       <LoadingIcon class="loading" v-if="products.loading" />
       <p v-if="products.error">{{ products.error.message }}</p>
 
-      <div class="products">
+      <TransitionGroup
+        class="products"
+        name="products"
+        aria-live="polite"
+        tag="div"
+      >
         <ProductCard
           v-for="product in catalog.products"
           :key="product.id"
@@ -33,7 +38,7 @@ const catalog = useCatalogStore()
           :price="product.price"
           :available="product.available"
         />
-      </div>
+      </TransitionGroup>
     </div>
   </section>
 </template>
@@ -78,6 +83,23 @@ const catalog = useCatalogStore()
   .products {
     --columns: 3;
   }
+}
+
+.products-enter-active,
+.products-leave-active {
+  transition-duration: 250ms;
+  transition-property: opacity, transform;
+  transition-timing-function: ease-in-out;
+}
+
+.products-leave-active {
+  transition-duration: 500ms;
+}
+
+.products-enter-from,
+.products-leave-to {
+  transform: translateY(-1rem);
+  opacity: 0;
 }
 
 .loading {

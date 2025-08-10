@@ -87,6 +87,11 @@ const styles: HTMLAttributes['class'] = {
   transition-timing-function: ease;
 }
 
+.button[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .button.primary {
   border-radius: var(--border-sm);
   background-color: var(--dark-9);
@@ -99,6 +104,10 @@ const styles: HTMLAttributes['class'] = {
 
 .button.primary:focus-visible {
   outline-color: var(--dark-9);
+}
+
+.button.button.primary[disabled] {
+  background-color: var(--gray-5);
 }
 
 .button.secondary {
@@ -118,6 +127,11 @@ const styles: HTMLAttributes['class'] = {
   outline-color: var(--dark-9);
 }
 
+.button.secondary[disabled] {
+  border-color: var(--gray-5);
+  color: var(--gray-5);
+}
+
 .button.accent {
   border-radius: var(--border-sm);
   background-color: var(--color-accent);
@@ -126,6 +140,10 @@ const styles: HTMLAttributes['class'] = {
 
 .button.accent:hover {
   background-color: var(--color-accent-on-hover);
+}
+
+.button.accent[disabled] {
+  background-color: var(--gray-5);
 }
 
 .button.small {

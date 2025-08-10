@@ -14,30 +14,17 @@ defineOptions({ inheritAttrs: false })
 
 const filters = useFilterStore()
 
-const submit = () => {
-  filters.addFilter({ search: filters.options.search })
-}
-
 const clear = () => {
   filters.options.search = ''
   filters.removeFilter(['search'])
-}
-
-const onKeyDown = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') submit()
 }
 </script>
 
 <template>
   <div role="search" class="search--base">
-    <button
-      type="submit"
-      class="search-button"
-      aria-label="submit search"
-      @click="submit"
-    >
+    <div class="search-icon-wrapper">
       <SearchIcon class="search-icon" aria-hidden="true" />
-    </button>
+    </div>
 
     <input
       type="search"
@@ -47,7 +34,6 @@ const onKeyDown = (event: KeyboardEvent) => {
       :placeholder="placeholder"
       :aria-label="label"
       v-model="filters.options.search"
-      @keydown="onKeyDown"
       v-bind="$attrs"
     />
 
@@ -76,13 +62,22 @@ const onKeyDown = (event: KeyboardEvent) => {
   background-color: var(--light-2);
 }
 
-:is(.search-button, .clear-button) {
+.search--base:has(.search:focus-visible) {
+  outline-color: var(--color-focus);
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+:is(.search-icon-wrapper, .clear-button) {
   display: grid;
   place-items: center;
   padding-inline: var(--spacing-md);
   padding-block: var(--spacing-sm);
-  border: none;
   border-radius: var(--border-xs);
+}
+
+.clear-button {
+  border: none;
   background-color: transparent;
   cursor: pointer;
 }

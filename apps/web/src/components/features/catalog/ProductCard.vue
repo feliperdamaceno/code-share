@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import Button from '@/components/primitives/Button.vue'
 
@@ -19,6 +19,10 @@ const {
 
 const invalidSrc = ref<boolean>(false)
 const isLongTitle = title.length >= 50
+
+const status = computed(() => {
+  return available ? 'Add to Cart' : 'Out of Stock'
+})
 </script>
 
 <template>
@@ -41,8 +45,10 @@ const isLongTitle = title.length >= 50
       </div>
 
       <strong class="price">{{ formatPrice({ value: price }) }}</strong>
-      <p v-if="available === false" class="availability">Out of Stock</p>
-      <Button class="cta" variant="accent">Add to Cart</Button>
+
+      <Button class="cta" variant="accent" :disabled="!available">
+        {{ status }}
+      </Button>
     </div>
   </div>
 </template>
@@ -91,11 +97,6 @@ const isLongTitle = title.length >= 50
   font-weight: var(--font-weight-medium);
   font-size: var(--text-xl);
   font-family: var(--font-heading);
-}
-
-.information .availability {
-  color: var(--gray-5);
-  font-weight: var(--font-weight-medium);
 }
 
 .information .cta {
