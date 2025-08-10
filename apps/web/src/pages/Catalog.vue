@@ -27,6 +27,7 @@ const catalog = useCatalogStore()
       <div class="products">
         <ProductCard
           v-for="product in catalog.products"
+          class="product"
           :key="product.id"
           :src="product.images[0].src"
           :title="product.title"
@@ -61,14 +62,27 @@ const catalog = useCatalogStore()
 }
 
 .products {
-  --card-size: 260px;
+  --columns: 1;
 
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(var(--card-size), 100%), 1fr)
-  );
+  grid-template-columns: repeat(var(--columns), 1fr);
   gap: var(--spacing-md);
+}
+
+@media (min-width: 940px) {
+  .products {
+    --columns: 2;
+  }
+}
+
+@media (min-width: 1250px) {
+  .products {
+    --columns: 3;
+  }
+}
+
+.product {
+  max-inline-size: var(--card-size);
 }
 
 .loading {
