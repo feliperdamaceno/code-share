@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CloseIcon from '@/assets/icons/close.svg'
 import SearchIcon from '@/assets/icons/search.svg'
-import { useSearchStore } from '@/stores/search.store'
+import { useCatalogStore } from '@/stores/catalog.store'
 
 type Props = {
   placeholder?: string
@@ -12,10 +12,10 @@ const { placeholder = undefined, label = undefined } = defineProps<Props>()
 
 defineOptions({ inheritAttrs: false })
 
-const search = useSearchStore()
+const catalog = useCatalogStore()
 
 const onKeyDown = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') search.submit()
+  if (event.key === 'Enter') catalog.submitSearch()
 }
 </script>
 
@@ -25,7 +25,7 @@ const onKeyDown = (event: KeyboardEvent) => {
       type="submit"
       class="search-button"
       aria-label="submit search"
-      @click="search.submit"
+      @click="catalog.submitSearch"
     >
       <SearchIcon class="search-icon" aria-hidden="true" />
     </button>
@@ -37,17 +37,17 @@ const onKeyDown = (event: KeyboardEvent) => {
       name="search"
       :placeholder="placeholder"
       :aria-label="label"
-      v-model="search.filters.search"
+      v-model="catalog.filters.search"
       @keydown="onKeyDown"
       v-bind="$attrs"
     />
 
     <Transition name="clear">
       <button
-        v-if="search.filters.search.length > 0"
+        v-if="catalog.filters.search.length > 0"
         class="clear-button"
         aria-label="clear search input"
-        @click="search.clearSearch"
+        @click="catalog.clearSearch"
       >
         <CloseIcon class="clear-icon" aria-hidden="true" />
       </button>

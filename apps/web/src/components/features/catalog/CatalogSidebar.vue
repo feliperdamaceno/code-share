@@ -6,11 +6,11 @@ import Accordion from '@/components/primitives/Accordion.vue'
 import Checkbox from '@/components/primitives/Checkbox.vue'
 
 import LoadingIcon from '@/assets/icons/loading.svg'
+import { useCatalogStore } from '@/stores/catalog.store'
 import { useCategoryStore } from '@/stores/category.store'
-import { useSearchStore } from '@/stores/search.store'
 
 const categories = useCategoryStore()
-const search = useSearchStore()
+const catalog = useCatalogStore()
 
 onBeforeMount(() => categories.load())
 </script>
@@ -68,8 +68,11 @@ onBeforeMount(() => categories.load())
         <h2 class="heading">Filter By:</h2>
       </div>
 
-      <Checkbox name="newest" v-model="search.filters.newest">Newest</Checkbox>
-      <Checkbox name="featured" v-model="search.filters.featured">
+      <Checkbox name="newest" v-model="catalog.filters.newest">
+        Newest
+      </Checkbox>
+
+      <Checkbox name="featured" v-model="catalog.filters.featured">
         Featured
       </Checkbox>
     </div>
