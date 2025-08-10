@@ -6,43 +6,43 @@ import Accordion from '@/components/primitives/Accordion.vue'
 import Checkbox from '@/components/primitives/Checkbox.vue'
 
 import LoadingIcon from '@/assets/icons/loading.svg'
-import { useCatalogStore } from '@/stores/catalog.store'
 import { useCategoryStore } from '@/stores/category.store'
+import { useFilterStore } from '@/stores/filter.store'
 
 const categories = useCategoryStore()
-const catalog = useCatalogStore()
+const filters = useFilterStore()
 
 onBeforeMount(() => categories.load())
 
 function resetPrice() {
-  catalog.filters['price-from'] = 0
-  catalog.filters['price-to'] = 0
-  catalog.removeQuery(['price-from', 'price-to'])
+  filters.options['price-from'] = 0
+  filters.options['price-to'] = 0
+  filters.removeFilter(['price-from', 'price-to'])
 }
 
 function selectCategory(category: string) {
-  catalog.filters.category = category
-  catalog.addQuery({ category: category })
+  filters.options.category = category
+  filters.addFilter({ category: category })
 }
 
 function resetCategory() {
-  catalog.filters.category = ''
-  catalog.removeQuery(['category'])
+  filters.options.category = ''
+  filters.removeFilter(['category'])
 }
 
 watch(
-  () => catalog.filters.newest,
+  () => filters.options.newest,
   (value) => {
-    if (value) return catalog.addQuery({ newest: value })
-    catalog.removeQuery(['newest'])
+    if (value) return filters.addFilter({ newest: value })
+    filters.removeFilter(['newest'])
   }
 )
 
 watch(
-  () => catalog.filters.featured,
+  () => filters.options.featured,
   (value) => {
-    if (value) return catalog.addQuery({ featured: value })
-    catalog.removeQuery(['featured'])
+    if (value) return filters.addFilter({ featured: value })
+    filters.removeFilter(['featured'])
   }
 )
 </script>
@@ -86,8 +86,8 @@ watch(
             v-for="option in category.options"
             class="option"
             :key="option.id"
-            :class="{ active: catalog.filters.category === option.name }"
-            :aria-pressed="catalog.filters.category === option.name"
+            :class="{ active: filters.options.category === option.name }"
+            :aria-pressed="filters.options.category === option.name"
             @click="selectCategory(option.name)"
           >
             {{ option.name }}
@@ -103,11 +103,11 @@ watch(
         <h2 class="heading">Filter By:</h2>
       </div>
 
-      <Checkbox name="newest" v-model="catalog.filters.newest">
+      <Checkbox name="newest" v-model="filters.options.newest">
         Newest
       </Checkbox>
 
-      <Checkbox name="featured" v-model="catalog.filters.featured">
+      <Checkbox name="featured" v-model="filters.options.featured">
         Featured
       </Checkbox>
     </div>

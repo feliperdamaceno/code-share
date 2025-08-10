@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CloseIcon from '@/assets/icons/close.svg'
 import SearchIcon from '@/assets/icons/search.svg'
-import { useCatalogStore } from '@/stores/catalog.store'
+import { useFilterStore } from '@/stores/filter.store'
 
 type Props = {
   placeholder?: string
@@ -12,15 +12,15 @@ const { placeholder = undefined, label = undefined } = defineProps<Props>()
 
 defineOptions({ inheritAttrs: false })
 
-const catalog = useCatalogStore()
+const filters = useFilterStore()
 
 const submit = () => {
-  catalog.addQuery({ search: catalog.filters.search })
+  filters.addFilter({ search: filters.options.search })
 }
 
 const clear = () => {
-  catalog.filters.search = ''
-  catalog.removeQuery(['search'])
+  filters.options.search = ''
+  filters.removeFilter(['search'])
 }
 
 const onKeyDown = (event: KeyboardEvent) => {
@@ -46,14 +46,14 @@ const onKeyDown = (event: KeyboardEvent) => {
       name="search"
       :placeholder="placeholder"
       :aria-label="label"
-      v-model="catalog.filters.search"
+      v-model="filters.options.search"
       @keydown="onKeyDown"
       v-bind="$attrs"
     />
 
     <Transition name="clear">
       <button
-        v-if="catalog.filters.search.length > 0"
+        v-if="filters.options.search.length > 0"
         class="clear-button"
         aria-label="clear search input"
         @click="clear"

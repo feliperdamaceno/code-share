@@ -1,35 +1,35 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import { useCatalogStore } from '@/stores/catalog.store'
+import { useFilterStore } from '@/stores/filter.store'
 
-const catalog = useCatalogStore()
+const filters = useFilterStore()
 
 const priceFrom = computed({
   get() {
-    const value = catalog.filters['price-from']
+    const value = filters.options['price-from']
     return value > 0 ? value : undefined
   },
   set(value: number | undefined) {
     value = Number(value || 0)
     const from = value <= 0 ? 0 : value
 
-    catalog.addQuery({ ['price-from']: from })
-    catalog.filters['price-from'] = from
+    filters.addFilter({ ['price-from']: from })
+    filters.options['price-from'] = from
   }
 })
 
 const priceTo = computed({
   get() {
-    const value = catalog.filters['price-to']
+    const value = filters.options['price-to']
     return value > 0 ? value : undefined
   },
   set(value: number | undefined) {
     value = Number(value || 0)
     const to = value <= 0 ? 0 : value
 
-    catalog.addQuery({ ['price-to']: to })
-    catalog.filters['price-to'] = to
+    filters.addFilter({ ['price-to']: to })
+    filters.options['price-to'] = to
   }
 })
 </script>

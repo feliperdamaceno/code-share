@@ -11,12 +11,12 @@ type Query<Filters> = {
 
 const toBool = (value: unknown) => value === 'true' || value === true
 
-export const useCatalogStore = defineStore('catalog', () => {
+export const useFilterStore = defineStore('filter', () => {
   const route = useRoute()
   const router = useRouter()
 
   /* state */
-  const filters = reactive({
+  const options = reactive({
     ['price-from']: Number(route.query['price-from'] || 0),
     ['price-to']: Number(route.query['price-to'] || 0),
     search: String(route.query['search'] || ''),
@@ -26,15 +26,15 @@ export const useCatalogStore = defineStore('catalog', () => {
   })
 
   /* actions */
-  type Filters = typeof filters
-  function addQuery(query: Query<Filters>) {
+  type Filters = typeof options
+  function addFilter(query: Query<Filters>) {
     router.push({
       query: { ...route.query, ...(query as LocationQueryRaw) }
     })
   }
 
-  type FilterKeys = keyof typeof filters
-  function removeQuery(keys: FilterKeys[]) {
+  type FilterKeys = keyof typeof options
+  function removeFilter(keys: FilterKeys[]) {
     const queries = { ...route.query }
     keys.forEach((key) => delete queries[key])
     router.push({ query: queries })
@@ -48,12 +48,14 @@ export const useCatalogStore = defineStore('catalog', () => {
       router.replace({ query: {} })
 
       /* reset all filters */
-      filters.search = ''
-      filters.category = ''
-      filters.newest = false
-      filters.featured = false
+      options['price-from'] = 0
+      options['price-to'] = 0
+      options.search = ''
+      options.category = ''
+      options.newest = false
+      options.featured = false
     }
   )
 
-  return { filters, addQuery, removeQuery }
+  return { options, addFilter, removeFilter }
 })
