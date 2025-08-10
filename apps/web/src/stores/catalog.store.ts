@@ -29,7 +29,7 @@ export const useCatalogStore = defineStore('catalog', () => {
     let min = filters.options['price-from']
     let max = filters.options['price-to']
 
-    if (min === 0 || max === 0) return true
+    if (min === 0 && max === 0) return true
 
     if (product.price < min) return false
     if (product.price > max) return false
