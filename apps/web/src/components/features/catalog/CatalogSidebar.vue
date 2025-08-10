@@ -12,6 +12,16 @@ import { useCategoryStore } from '@/stores/category.store'
 const categories = useCategoryStore()
 const catalog = useCatalogStore()
 
+function selectCategory(category: string) {
+  catalog.filters.category = category
+  catalog.addQuery({ category: category })
+}
+
+function resetCategory() {
+  catalog.filters.category = ''
+  catalog.removeQuery('category')
+}
+
 onBeforeMount(() => categories.load())
 </script>
 
@@ -35,7 +45,7 @@ onBeforeMount(() => categories.load())
     <div class="filter-section">
       <div class="heading-group">
         <h2 class="heading">Category</h2>
-        <button class="reset-button">Clear</button>
+        <button class="reset-button" @click="resetCategory">Reset</button>
       </div>
 
       <LoadingIcon class="loading" v-if="categories.loading" />
@@ -45,15 +55,18 @@ onBeforeMount(() => categories.load())
 
       <div v-else class="categories">
         <Accordion
-          v-for="(category, index) in categories.data.get('categories')"
+          v-for="category in categories.data.get('categories')"
           :key="category.id"
           :title="category.name"
-          :open="index === 0"
+          :open="true"
         >
           <button
-            class="option"
             v-for="option in category.options"
+            class="option"
             :key="option.id"
+            :class="{ active: catalog.filters.category === option.name }"
+            :aria-pressed="catalog.filters.category === option.name"
+            @click="selectCategory(option.name)"
           >
             {{ option.name }}
           </button>
@@ -114,6 +127,13 @@ onBeforeMount(() => categories.load())
   font-weight: var(--font-weight-medium);
   font-size: var(--text-small);
   cursor: pointer;
+  transition-duration: 150ms;
+  transition-property: color;
+  transition-timing-function: ease;
+}
+
+.heading-group .reset-button:hover {
+  color: var(--color-accent-on-hover);
 }
 
 .categories .option {
@@ -123,6 +143,11 @@ onBeforeMount(() => categories.load())
   border: 0;
   background-color: transparent;
   cursor: pointer;
+}
+
+.categories .option.active {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
 }
 
 .categories .option:not(:last-of-type) {

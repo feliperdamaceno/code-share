@@ -41,7 +41,7 @@ export const useCatalogStore = defineStore('catalog', () => {
   watch(
     () => filters.newest,
     (value) => {
-      if (value) return addQuery({ ['newest']: value })
+      if (value) return addQuery({ newest: value })
       removeQuery('newest')
     }
   )
@@ -49,7 +49,7 @@ export const useCatalogStore = defineStore('catalog', () => {
   watch(
     () => filters.featured,
     (value) => {
-      if (value) return addQuery({ ['featured']: value })
+      if (value) return addQuery({ featured: value })
       removeQuery('featured')
     }
   )

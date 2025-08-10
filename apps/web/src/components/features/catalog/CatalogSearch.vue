@@ -15,7 +15,7 @@ defineOptions({ inheritAttrs: false })
 const catalog = useCatalogStore()
 
 const submit = () => {
-  catalog.addQuery({ ['search']: catalog.filters.search })
+  catalog.addQuery({ search: catalog.filters.search })
 }
 
 const clear = () => {

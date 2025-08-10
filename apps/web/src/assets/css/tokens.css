@@ -8,7 +8,7 @@
   --light-4: #c4c6c6;
   --light-3: #e5e5e5;
   --light-2: #fdfdfd;
-  --blue-5: #257dcb;
+  --blue-6: #1c5e99;
   --blue-4: #4292d9;
   --red-5: #cc3629;
 
@@ -55,11 +55,11 @@
 :root {
   /* Colors */
   --color-accent: var(--blue-4);
-  --color-accent-on-hover: var(--blue-5);
+  --color-accent-on-hover: var(--blue-6);
   --color-text: var(--dark-9);
   --color-text-on-dark: var(--light-2);
   --color-danger: var(--red-5);
-  --color-focus: var(--blue-5);
+  --color-focus: var(--blue-4);
 
   /* Font */
   --text-heading-1: var(--text-4xl);
