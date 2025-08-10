@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, watch } from 'vue'
 
 import PriceRange from '@/components/features/catalog/PriceRange.vue'
 import Accordion from '@/components/primitives/Accordion.vue'
@@ -12,6 +12,8 @@ import { useCategoryStore } from '@/stores/category.store'
 const categories = useCategoryStore()
 const catalog = useCatalogStore()
 
+onBeforeMount(() => categories.load())
+
 function selectCategory(category: string) {
   catalog.filters.category = category
   catalog.addQuery({ category: category })
@@ -22,7 +24,21 @@ function resetCategory() {
   catalog.removeQuery('category')
 }
 
-onBeforeMount(() => categories.load())
+watch(
+  () => catalog.filters.newest,
+  (value) => {
+    if (value) return catalog.addQuery({ newest: value })
+    catalog.removeQuery('newest')
+  }
+)
+
+watch(
+  () => catalog.filters.featured,
+  (value) => {
+    if (value) return catalog.addQuery({ featured: value })
+    catalog.removeQuery('featured')
+  }
+)
 </script>
 
 <template>

@@ -37,23 +37,6 @@ export const useCatalogStore = defineStore('catalog', () => {
     router.push({ query: { ...queries } })
   }
 
-  /* watchers */
-  watch(
-    () => filters.newest,
-    (value) => {
-      if (value) return addQuery({ newest: value })
-      removeQuery('newest')
-    }
-  )
-
-  watch(
-    () => filters.featured,
-    (value) => {
-      if (value) return addQuery({ featured: value })
-      removeQuery('featured')
-    }
-  )
-
   /* filters should only be kept withing the catalog route */
   watch(
     () => route.path,
