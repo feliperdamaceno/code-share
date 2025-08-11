@@ -22,7 +22,16 @@ const catalog = useCatalogStore()
       />
 
       <LoadingIcon class="loading" v-if="products.loading" />
-      <p v-if="products.error">{{ products.error.message }}</p>
+
+      <p class="message" v-if="catalog.products.length === 0">
+        Nothing here yet. maybe try a different keyword or adjust your filters
+        to explore other options.
+      </p>
+
+      <p class="error" v-if="products.error">
+        Ops! something went wrong while loading our products, please try again
+        later.
+      </p>
 
       <TransitionGroup
         class="products"
@@ -110,7 +119,11 @@ const catalog = useCatalogStore()
   opacity: 0;
 }
 
-.loading {
+:where(.loading, .error, .message) {
   align-self: center;
+}
+
+.error {
+  color: var(--color-danger);
 }
 </style>
