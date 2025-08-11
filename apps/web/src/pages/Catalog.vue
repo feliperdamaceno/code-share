@@ -46,16 +46,17 @@ const catalog = useCatalogStore()
 <style scoped>
 .catalog {
   --sidebar-size: 300px;
+  --content-size: 1fr;
 
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
 }
 
-@media (min-width: 660px) {
+@media (640px <= width) {
   .catalog {
     display: grid;
-    grid-template-columns: min(var(--sidebar-size, 100%)) 1fr;
+    grid-template-columns: min(var(--sidebar-size), 100%) var(--content-size);
   }
 }
 
@@ -67,19 +68,26 @@ const catalog = useCatalogStore()
 
 .products {
   --columns: 1;
+  --product-size: 1fr;
 
   display: grid;
-  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-columns: repeat(var(--columns), var(--product-size));
   gap: var(--spacing-md);
 }
 
-@media (min-width: 940px) {
+@media (580px <= width <= 640px) {
   .products {
     --columns: 2;
   }
 }
 
-@media (min-width: 1250px) {
+@media (920px <= width) {
+  .products {
+    --columns: 2;
+  }
+}
+
+@media (1200px <= width) {
   .products {
     --columns: 3;
   }
