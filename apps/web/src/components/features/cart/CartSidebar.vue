@@ -1,40 +1,69 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, useTemplateRef } from 'vue'
+
 import CartItem from '@/components/features/cart/CartItem.vue'
 import CouponsField from '@/components/features/cart/CouponsField.vue'
 import Button from '@/components/primitives/Button.vue'
 
 import { formatPrice } from '@/utils/ecomm'
 
-import CloseIcon from '@/assets/icons/close.svg'
+import { useCartSidebarStore, useCartStore } from '@/stores/cart.store'
 
-type CartProduct = {
-  src: string
-  title: string
-  price: number
-  quantity: number
-}
+import CloseIcon from '@/assets/icons/close.svg'
 
 const emit = defineEmits<{
   close: []
 }>()
 
-const cart: CartProduct[] = []
+const sidebar = useCartSidebarStore()
+const cart = useCartStore()
+
+const cartSidebarRef = useTemplateRef<HTMLButtonElement>('cart-sidebar')
+const closeButtonRef = useTemplateRef<HTMLButtonElement>('close-button')
+const previousElement = document.activeElement
+
+function onFocusOut(event: FocusEvent) {
+  if (cartSidebarRef.value?.contains(event.relatedTarget as Node)) return
+  sidebar.open = false
+}
+
+onMounted(() => {
+  if (!cartSidebarRef.value || !closeButtonRef.value) return
+
+  cartSidebarRef.value?.addEventListener('focusout', onFocusOut)
+  closeButtonRef.value.focus()
+})
+
+onUnmounted(() => {
+  cartSidebarRef.value?.removeEventListener('focusout', onFocusOut)
+
+  if (previousElement && previousElement instanceof HTMLElement) {
+    return previousElement.focus()
+  }
+
+  document.body.focus()
+})
 </script>
 
 <template>
-  <section class="cart-sidebar" role="dialog" aria-modal="true">
+  <section
+    ref="cart-sidebar"
+    class="cart-sidebar"
+    role="dialog"
+    aria-modal="true"
+  >
     <div class="cart-header">
       <h2 class="heading">Shopping Cart</h2>
-      <button class="close-button" @click="emit('close')">
+      <button ref="close-button" class="close-button" @click="emit('close')">
         <CloseIcon class="close-icon" aria-hidden="true" />
       </button>
     </div>
 
     <div class="cart-items">
-      <ul v-if="cart.length" class="cart-items-list" role="list">
-        <li v-for="item in cart">
+      <ul v-if="cart.size" class="cart-items-list" role="list">
+        <li v-for="item in cart.products">
           <CartItem
-            :src="item.src"
+            :src="item.image"
             :title="item.title"
             :price="item.price"
             :quantity="item.quantity"
@@ -78,7 +107,7 @@ const cart: CartProduct[] = []
 .cart-sidebar {
   display: flex;
   z-index: 1000;
-  position: absolute;
+  position: fixed;
   flex-direction: column;
   align-content: start;
   inline-size: 100%;

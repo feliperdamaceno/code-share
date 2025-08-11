@@ -12,7 +12,7 @@ export const useCatalogStore = defineStore('catalog', () => {
   const products = useProductStore()
 
   /* getters */
-  const data = computed((): Product[] => {
+  const filtered = computed((): Product[] => {
     const initial = products.data.get('products')
 
     if (!initial) return []
@@ -70,5 +70,5 @@ export const useCatalogStore = defineStore('catalog', () => {
     return product.featured
   }
 
-  return { products: data }
+  return { products: filtered }
 })

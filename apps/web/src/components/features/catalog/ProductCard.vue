@@ -5,23 +5,35 @@ import Button from '@/components/primitives/Button.vue'
 
 import { formatPrice } from '@/utils/ecomm'
 
+import { useCartStore } from '@/stores/cart.store'
+
+const emit = defineEmits<{
+  'add-to-cart': []
+}>()
+
 const {
-  src = '',
+  id = '',
+  image: src = '',
   title = '',
   price,
   available
 } = defineProps<{
-  src: string
+  id: string
   title: string
+  image: string
   price: number
   available: boolean
 }>()
+
+const cart = useCartStore()
 
 const invalidSrc = ref<boolean>(false)
 const isLongTitle = title.length >= 50
 
 const status = computed(() => {
-  return available ? 'Add to Cart' : 'Out of Stock'
+  if (cart.inCart(id)) return 'In Cart'
+  if (available === true) return 'Add to Cart'
+  if (available === false) return 'Out of Stock'
 })
 </script>
 
@@ -46,9 +58,19 @@ const status = computed(() => {
 
       <strong class="price">{{ formatPrice({ value: price }) }}</strong>
 
-      <Button class="cta" variant="accent" :disabled="!available">
+      <Button
+        class="cta"
+        variant="accent"
+        :disabled="!available"
+        :aria-pressed="cart.inCart(id)"
+        @click="emit('add-to-cart')"
+      >
         {{ status }}
       </Button>
+
+      <span v-if="cart.inCart(id)" class="visually-hidden" aria-live="polite">
+        Item added to cart
+      </span>
     </div>
   </div>
 </template>

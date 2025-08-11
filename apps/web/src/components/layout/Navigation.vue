@@ -13,8 +13,8 @@ const links = routes
 </script>
 
 <template>
-  <header class="navigation--base">
-    <nav class="navigation">
+  <header class="navigation">
+    <nav class="container">
       <RouterLink to="/">
         <h1 class="brand">Code Share</h1>
       </RouterLink>
@@ -46,7 +46,7 @@ const links = routes
 </template>
 
 <style scoped>
-.navigation--base {
+.navigation {
   padding-inline: var(--spacing-md);
   padding-block: var(--spacing-sm);
   border-width: 1px;
@@ -56,7 +56,7 @@ const links = routes
   background-color: var(--light-2);
 }
 
-.navigation {
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;

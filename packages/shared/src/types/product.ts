@@ -15,3 +15,11 @@ export type Product = {
   featured: boolean
   createdAt: number
 }
+
+export type CartProduct = {
+  id: string
+  title: string
+  image: string
+  price: number
+  quantity: number
+}

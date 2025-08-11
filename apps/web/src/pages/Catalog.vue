@@ -1,14 +1,32 @@
 <script setup lang="ts">
+import type { Product } from '@code-share/shared/types/product'
+
 import CatalogSearch from '@/components/features/catalog/CatalogSearch.vue'
 import CatalogSidebar from '@/components/features/catalog/CatalogSidebar.vue'
 import ProductCard from '@/components/features/catalog/ProductCard.vue'
 
-import LoadingIcon from '@/assets/icons/loading.svg'
+import { useCartSidebarStore, useCartStore } from '@/stores/cart.store'
 import { useCatalogStore } from '@/stores/catalog.store'
 import { useProductStore } from '@/stores/product.store'
 
+import LoadingIcon from '@/assets/icons/loading.svg'
+
+const sidebar = useCartSidebarStore()
+const cart = useCartStore()
 const products = useProductStore()
 const catalog = useCatalogStore()
+
+function addToCart(product: Product) {
+  cart.add({
+    id: product.id,
+    title: product.title,
+    image: product.images[0].src,
+    price: product.price,
+    quantity: 1
+  })
+
+  sidebar.open = true
+}
 </script>
 
 <template>
@@ -24,12 +42,12 @@ const catalog = useCatalogStore()
       <LoadingIcon class="loading" v-if="products.loading" />
 
       <p class="message" v-if="catalog.products.length === 0">
-        Nothing here yet. maybe try a different keyword or adjust your filters
+        Nothing here yet. Maybe try a different keyword or adjust your filters
         to explore other options.
       </p>
 
       <p class="error" v-if="products.error">
-        Ops! something went wrong while loading our products, please try again
+        Ops! Something went wrong while loading our products, please try again
         later.
       </p>
 
@@ -42,10 +60,12 @@ const catalog = useCatalogStore()
         <ProductCard
           v-for="product in catalog.products"
           :key="product.id"
-          :src="product.images[0].src"
+          :id="product.id"
           :title="product.title"
+          :image="product.images[0].src"
           :price="product.price"
           :available="product.available"
+          @add-to-cart="addToCart(product)"
         />
       </TransitionGroup>
     </div>

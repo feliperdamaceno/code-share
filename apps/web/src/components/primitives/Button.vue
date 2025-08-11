@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
 
-type Variants = 'primary' | 'secondary' | 'accent'
+type Variants = 'primary' | 'secondary' | 'accent' | 'success' | 'danger'
 
 type Sizes = 'small' | 'medium' | 'large'
 
@@ -46,6 +46,8 @@ const styles: HTMLAttributes['class'] = {
   ['primary']: variant === 'primary',
   ['secondary']: variant === 'secondary',
   ['accent']: variant === 'accent',
+  ['success']: variant === 'success',
+  ['danger']: variant === 'danger',
   ['small']: size === 'small',
   ['medium']: size === 'medium',
   ['large']: size === 'large'
@@ -142,6 +144,34 @@ const styles: HTMLAttributes['class'] = {
 }
 
 .button.accent[disabled] {
+  background-color: var(--gray-5);
+}
+
+.button.success {
+  border-radius: var(--border-sm);
+  background-color: var(--color-success);
+  color: var(--color-text-on-dark);
+}
+
+.button.success:hover {
+  background-color: var(--color-success-on-hover);
+}
+
+.button.success[disabled] {
+  background-color: var(--gray-5);
+}
+
+.button.danger {
+  border-radius: var(--border-sm);
+  background-color: var(--color-danger);
+  color: var(--color-text-on-dark);
+}
+
+.button.danger:hover {
+  background-color: var(--color-danger-on-hover);
+}
+
+.button.danger[disabled] {
   background-color: var(--gray-5);
 }
 

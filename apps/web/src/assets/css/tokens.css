@@ -10,6 +10,9 @@
   --light-2: #fdfdfd;
   --blue-6: #1c5e99;
   --blue-4: #4292d9;
+  --green-5: #2c6e49;
+  --green-4: #4c956c;
+  --red-6: #aa2d22;
   --red-5: #cc3629;
 
   /* Font */
@@ -54,11 +57,14 @@
 /* Tier 2 */
 :root {
   /* Colors */
-  --color-accent: var(--blue-4);
-  --color-accent-on-hover: var(--blue-6);
   --color-text: var(--dark-9);
   --color-text-on-dark: var(--light-2);
+  --color-accent: var(--blue-4);
+  --color-accent-on-hover: var(--blue-6);
+  --color-success: var(--green-4);
+  --color-success-on-hover: var(--green-5);
   --color-danger: var(--red-5);
+  --color-danger-on-hover: var(--red-6);
   --color-focus: var(--blue-4);
 
   /* Font */
