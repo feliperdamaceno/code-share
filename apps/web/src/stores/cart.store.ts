@@ -12,6 +12,20 @@ export const useCartStore = defineStore('cart', () => {
   const products = computed((): CartProduct[] => Array.from(cart.values()))
   const size = computed(() => products.value.length)
 
+  const subtotal = computed(() => {
+    return products.value.reduce((result, product) => {
+      result += product.price * product.quantity
+      return result
+    }, 0)
+  })
+
+  const MOCK_PERCENTAGE = 10
+  const discount = computed(() => (MOCK_PERCENTAGE / 100) * subtotal.value)
+
+  const total = computed(() => {
+    return subtotal.value - discount.value
+  })
+
   /* actions */
   function inCart(id: string) {
     return cart.has(id)
@@ -38,7 +52,18 @@ export const useCartStore = defineStore('cart', () => {
     cart.delete(id)
   }
 
-  return { products, size, add, remove, increase, decrease, inCart }
+  return {
+    products,
+    size,
+    subtotal,
+    discount,
+    total,
+    add,
+    remove,
+    increase,
+    decrease,
+    inCart
+  }
 })
 
 export const useCartSidebarStore = defineStore('cart-sidebar', () => {

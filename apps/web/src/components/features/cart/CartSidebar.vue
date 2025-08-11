@@ -74,17 +74,17 @@ onUnmounted(() => {
       <ul class="cart-information" role="list">
         <li class="subtotal">
           <span>Subtotal</span>
-          <span>{{ formatPrice({ value: 0 }) }}</span>
+          <span>{{ formatPrice({ value: cart.subtotal }) }}</span>
         </li>
 
         <li class="discount">
-          <span>Discount ({{ 0 }}%)</span>
-          <span>{{ formatPrice({ value: 0 }) }}</span>
+          <span>Discount ({{ 0 }}&#37;)</span>
+          <span>&#45;{{ formatPrice({ value: cart.discount }) }}</span>
         </li>
 
         <li class="total">
           <strong>Total</strong>
-          <strong>{{ formatPrice({ value: 0 }) }}</strong>
+          <strong>{{ formatPrice({ value: cart.total }) }}</strong>
         </li>
       </ul>
 
