@@ -5,9 +5,10 @@ import PriceRange from '@/components/features/catalog/PriceRange.vue'
 import Accordion from '@/components/primitives/Accordion.vue'
 import Checkbox from '@/components/primitives/Checkbox.vue'
 
-import LoadingIcon from '@/assets/icons/loading.svg'
 import { useCategoryStore } from '@/stores/category.store'
 import { useFilterStore } from '@/stores/filter.store'
+
+import LoadingIcon from '@/assets/icons/loading.svg'
 
 const categories = useCategoryStore()
 const filters = useFilterStore()
@@ -104,7 +105,7 @@ watch(
       </div>
 
       <Checkbox name="newest" v-model="filters.options.newest">
-        Newest (30 Days)
+        Newest (Last 30 Days)
       </Checkbox>
 
       <Checkbox name="featured" v-model="filters.options.featured">

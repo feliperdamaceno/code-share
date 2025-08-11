@@ -158,6 +158,10 @@ import Button from '@/components/primitives/Button.vue'
   gap: var(--spacing-md);
 }
 
+.link-group a:hover {
+  text-decoration-color: currentColor;
+}
+
 .divisor {
   height: 1px;
   margin: 0;

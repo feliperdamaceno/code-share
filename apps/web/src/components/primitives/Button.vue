@@ -88,7 +88,6 @@ const styles: HTMLAttributes['class'] = {
 }
 
 .button[disabled] {
-  cursor: not-allowed;
   pointer-events: none;
 }
 

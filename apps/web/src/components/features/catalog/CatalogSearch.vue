@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { useFilterStore } from '@/stores/filter.store'
+
 import CloseIcon from '@/assets/icons/close.svg'
 import SearchIcon from '@/assets/icons/search.svg'
-import { useFilterStore } from '@/stores/filter.store'
 
 type Props = {
   placeholder?: string
