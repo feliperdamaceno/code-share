@@ -1,25 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import type { CartProduct } from '@code-share/shared/types/product'
+
 import Counter from '@/components/primitives/Counter.vue'
 
 import { formatPrice } from '@/utils/ecomm'
 
+import { useCartStore } from '@/stores/cart.store'
+
 import TrashIcon from '@/assets/icons/trash.svg'
 
-const {
-  src = '',
-  title = '',
-  price,
-  quantity
-} = defineProps<{
-  src: string
-  title: string
-  price: number
-  quantity: number
-}>()
+const { title = '', quantity } = defineProps<CartProduct>()
 
-const count = ref(quantity)
+const cart = useCartStore()
+
 const invalidSrc = ref<boolean>(false)
 const isLongTitle = title.length >= 40
 </script>
@@ -29,7 +24,7 @@ const isLongTitle = title.length >= 40
     <img
       class="asset"
       :class="{ invalid: invalidSrc }"
-      :src="src"
+      :src="image"
       alt=""
       aria-hidden="true"
       @error="invalidSrc = true"
@@ -44,7 +39,11 @@ const isLongTitle = title.length >= 40
           <h3 class="visually-hidden">{{ title }}</h3>
         </div>
 
-        <button class="delete-button" aria-label="remove item from cart">
+        <button
+          class="delete-button"
+          aria-label="remove item from cart"
+          @click="cart.remove(id)"
+        >
           <TrashIcon class="trash-icon" aria-hidden="true" />
         </button>
       </div>
@@ -53,8 +52,10 @@ const isLongTitle = title.length >= 40
         <Counter
           :min="1"
           :max="99"
+          :initial="quantity"
           aria-label="product quantity selector"
-          v-model="count"
+          @increment="cart.increase(id)"
+          @decrement="cart.decrease(id)"
         />
         <strong class="price">{{ formatPrice({ value: price }) }}</strong>
       </div>

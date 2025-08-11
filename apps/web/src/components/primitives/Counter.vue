@@ -1,44 +1,50 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 import MinusIcon from '@/assets/icons/minus.svg'
 import PlusIcon from '@/assets/icons/plus.svg'
 
-type Props = {
+const emit = defineEmits<{
+  increment: []
+  decrement: []
+}>()
+
+const {
+  initial = 0,
+  label = undefined,
+  min = 0,
+  max = 99
+} = defineProps<{
+  initial?: number
   label?: string
   min?: number
   max?: number
-}
+}>()
 
-const { label = undefined, min = 0, max = 99 } = defineProps<Props>()
+const count = ref(initial)
 
-const count = defineModel<number>({ default: 0 })
-
-const decrease = () => {
-  if (count.value <= min) return
-  count.value--
-}
-
-const increase = () => {
+const increment = () => {
   if (count.value >= max) return
   count.value++
+  emit('increment')
+}
+
+const decrement = () => {
+  if (count.value <= min) return
+  count.value--
+  emit('decrement')
 }
 </script>
 
 <template>
   <div class="counter--base" :aria-label="label">
-    <button class="decrease-button" @click="decrease">
+    <button class="decrease-button" @click="decrement">
       <MinusIcon class="minus-icon" aria-hidden="true" />
     </button>
 
-    <input
-      class="count"
-      type="number"
-      name="count"
-      :min="min"
-      :max="max"
-      v-model="count"
-    />
+    <span class="count">{{ count }}</span>
 
-    <button class="increase-button" @click="increase">
+    <button class="increase-button" @click="increment">
       <PlusIcon class="plus-icon" aria-hidden="true" />
     </button>
   </div>
@@ -61,24 +67,11 @@ const increase = () => {
   display: grid;
   place-items: center;
   inline-size: 3rem;
-  padding-inline: unset;
-  padding-block: unset;
   border-inline-color: var(--light-3);
   border-inline-style: solid;
   border-inline-width: 1px;
-  border-block: none;
   font-weight: var(--font-weight-semibold);
   font-size: var(--text-small);
-}
-
-.count::-webkit-outer-spin-button,
-.count::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.count {
-  -moz-appearance: textfield;
 }
 
 :is(.decrease-button, .increase-button) {

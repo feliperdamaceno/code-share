@@ -13,7 +13,7 @@ const emit = defineEmits<{
 
 const {
   id = '',
-  image: src = '',
+  image = '',
   title = '',
   price,
   available
@@ -31,9 +31,7 @@ const invalidSrc = ref<boolean>(false)
 const isLongTitle = title.length >= 50
 
 const status = computed(() => {
-  if (cart.inCart(id)) return 'In Cart'
-  if (available === true) return 'Add to Cart'
-  if (available === false) return 'Out of Stock'
+  return available ? 'Add to Cart' : 'Out of Stock'
 })
 </script>
 
@@ -42,7 +40,7 @@ const status = computed(() => {
     <img
       class="asset"
       :class="{ invalid: invalidSrc }"
-      :src="src"
+      :src="image"
       alt=""
       aria-hidden="true"
       @error="invalidSrc = true"
@@ -68,8 +66,8 @@ const status = computed(() => {
         {{ status }}
       </Button>
 
-      <span v-if="cart.inCart(id)" class="visually-hidden" aria-live="polite">
-        Item added to cart
+      <span class="visually-hidden" aria-live="polite">
+        {{ cart.inCart(id) ? 'Item added to cart' : '' }}
       </span>
     </div>
   </div>

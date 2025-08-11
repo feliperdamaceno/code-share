@@ -7,7 +7,7 @@ import Button from '@/components/primitives/Button.vue'
 
 import { formatPrice } from '@/utils/ecomm'
 
-import { useCartSidebarStore, useCartStore } from '@/stores/cart.store'
+import { useCartStore } from '@/stores/cart.store'
 
 import CloseIcon from '@/assets/icons/close.svg'
 
@@ -15,28 +15,18 @@ const emit = defineEmits<{
   close: []
 }>()
 
-const sidebar = useCartSidebarStore()
 const cart = useCartStore()
 
-const cartSidebarRef = useTemplateRef<HTMLButtonElement>('cart-sidebar')
 const closeButtonRef = useTemplateRef<HTMLButtonElement>('close-button')
 const previousElement = document.activeElement
 
-function onFocusOut(event: FocusEvent) {
-  if (cartSidebarRef.value?.contains(event.relatedTarget as Node)) return
-  sidebar.open = false
-}
-
 onMounted(() => {
-  if (!cartSidebarRef.value || !closeButtonRef.value) return
-
-  cartSidebarRef.value?.addEventListener('focusout', onFocusOut)
-  closeButtonRef.value.focus()
+  if (closeButtonRef.value) {
+    closeButtonRef.value.focus()
+  }
 })
 
 onUnmounted(() => {
-  cartSidebarRef.value?.removeEventListener('focusout', onFocusOut)
-
   if (previousElement && previousElement instanceof HTMLElement) {
     return previousElement.focus()
   }
@@ -63,8 +53,10 @@ onUnmounted(() => {
       <ul v-if="cart.size" class="cart-items-list" role="list">
         <li v-for="item in cart.products">
           <CartItem
-            :src="item.image"
+            :key="item.id"
+            :id="item.id"
             :title="item.title"
+            :image="item.image"
             :price="item.price"
             :quantity="item.quantity"
           />
