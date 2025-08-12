@@ -145,5 +145,6 @@ function addToCart(product: Product) {
 
 .error {
   color: var(--color-danger);
+  font-weight: var(--font-weight-bold);
 }
 </style>

@@ -4,8 +4,12 @@ import type { CartProduct } from '@code-share/shared/types/product'
 
 import { defineStore } from 'pinia'
 
+import { useCouponStore } from './coupon.store'
+
 export const useCartStore = defineStore('cart', () => {
-  /* state */
+  const coupons = useCouponStore()
+
+  /* private: state */
   const cart = reactive<Map<string, CartProduct>>(new Map())
 
   /* getters */
@@ -19,11 +23,19 @@ export const useCartStore = defineStore('cart', () => {
     }, 0)
   })
 
-  const MOCK_PERCENTAGE = 10
-  const discount = computed(() => (MOCK_PERCENTAGE / 100) * subtotal.value)
+  const discount = computed(() => {
+    const percentage = coupons.validated.reduce((result, coupon) => {
+      return (result += coupon.discount)
+    }, 0)
+
+    return {
+      percentage,
+      total: (percentage / 100) * subtotal.value
+    }
+  })
 
   const total = computed(() => {
-    return subtotal.value - discount.value
+    return subtotal.value - discount.value.total
   })
 
   /* actions */

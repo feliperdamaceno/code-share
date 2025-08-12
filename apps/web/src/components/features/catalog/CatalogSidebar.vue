@@ -183,6 +183,7 @@ watch(
 
 .error {
   color: var(--color-danger);
+  font-weight: var(--font-weight-bold);
 }
 
 .divisor {

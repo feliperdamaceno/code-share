@@ -1,13 +1,16 @@
 [
   {
+    "id": "a36c494f-60cc-45e5-84e0-89346f652679",
     "code": "HELLOWORLD",
     "discount": 10
   },
   {
+    "id": "4b249ceb-9257-46ec-a928-2d22efc67f47",
     "code": "BYTEWISE10",
     "discount": 10
   },
   {
+    "id": "a718440c-7ec5-49cf-9976-c557098c679a",
     "code": "CODEMASTER25",
     "discount": 25
   }

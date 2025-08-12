@@ -22,7 +22,7 @@
     "author": "Alex Ramirez",
     "price": 79.0,
     "discount": {
-      "percentage": 25
+      "percentage": 10
     },
     "available": true,
     "featured": true,
@@ -94,7 +94,7 @@
     "author": "Marcus Chen",
     "price": 59.0,
     "discount": {
-      "percentage": 15
+      "percentage": 5
     },
     "available": false,
     "featured": false,
@@ -166,7 +166,7 @@
     "author": "Jason Miller",
     "price": 69.0,
     "discount": {
-      "percentage": 5
+      "percentage": 0
     },
     "available": true,
     "featured": true,

@@ -7,8 +7,9 @@ import Navigation from '@/components/layout/Navigation.vue'
 
 import { useProductStore } from '@/stores/product.store'
 
-/* loading global data to ensure is available across the application */
 const products = useProductStore()
+
+/* loading global data to ensure is available across the application */
 onBeforeMount(() => products.load())
 </script>
 

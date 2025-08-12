@@ -78,8 +78,8 @@ onUnmounted(() => {
         </li>
 
         <li class="discount">
-          <span>Discount ({{ 0 }}&#37;)</span>
-          <span>&#45;{{ formatPrice({ value: cart.discount }) }}</span>
+          <span>Discount ({{ cart.discount.percentage }}&#37;)</span>
+          <span>&#45;{{ formatPrice({ value: cart.discount.total }) }}</span>
         </li>
 
         <li class="total">

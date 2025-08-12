@@ -43,9 +43,7 @@ export const useProductStore = defineStore('product', () => {
     loading.value = false
 
     if (err !== null) {
-      error.value = err
-      console.error(error.value)
-      return
+      return (error.value = err)
     }
 
     data.value.set('products', products)
