@@ -22,6 +22,7 @@ function addToCart(product: Product) {
     title: product.title,
     image: product.images[0].src,
     price: product.price,
+    discount: product.discount,
     quantity: 1
   })
 
@@ -64,6 +65,7 @@ function addToCart(product: Product) {
           :title="product.title"
           :image="product.images[0].src"
           :price="product.price"
+          :discount="product.discount"
           :available="product.available"
           @add-to-cart="addToCart(product)"
         />

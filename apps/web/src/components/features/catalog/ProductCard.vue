@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
+import type { CatalogProduct } from '@code-share/shared/types/product'
+
 import Button from '@/components/primitives/Button.vue'
 
-import { formatPrice } from '@/utils/ecomm'
+import { formatPrice, getDiscountAmount } from '@/utils/ecomm'
 
 import { useCartStore } from '@/stores/cart.store'
 
@@ -13,17 +15,12 @@ const emit = defineEmits<{
 
 const {
   id = '',
-  image = '',
   title = '',
+  image = '',
   price,
+  discount,
   available
-} = defineProps<{
-  id: string
-  title: string
-  image: string
-  price: number
-  available: boolean
-}>()
+} = defineProps<CatalogProduct>()
 
 const cart = useCartStore()
 
@@ -32,6 +29,11 @@ const isLongTitle = title.length >= 50
 
 const status = computed(() => {
   return available ? 'Add to Cart' : 'Out of Stock'
+})
+
+const discountAmount = getDiscountAmount({
+  price,
+  discount: discount.percentage
 })
 </script>
 
@@ -54,20 +56,32 @@ const status = computed(() => {
         <h3 class="visually-hidden">{{ title }}</h3>
       </div>
 
-      <strong class="price">{{ formatPrice({ value: price }) }}</strong>
+      <strong class="price">
+        <span :class="{ discounted: discountAmount > 0 }">
+          {{ formatPrice({ value: price }) }}
+        </span>
+
+        <span v-if="discountAmount > 0">
+          {{ formatPrice({ value: price - discountAmount }) }}
+        </span>
+
+        <span v-if="discount.percentage" class="percentage">
+          &#45;{{ discount.percentage }}&#37;
+        </span>
+      </strong>
 
       <Button
         class="cta"
         variant="accent"
         :disabled="!available"
-        :aria-pressed="cart.inCart(id)"
+        :aria-pressed="cart.hasProduct(id)"
         @click="emit('add-to-cart')"
       >
         {{ status }}
       </Button>
 
       <span class="visually-hidden" aria-live="polite">
-        {{ cart.inCart(id) ? 'Item added to cart' : '' }}
+        {{ cart.hasProduct(id) ? 'Item added to cart' : '' }}
       </span>
     </div>
   </div>
@@ -114,9 +128,29 @@ const status = computed(() => {
 }
 
 .information .price {
+  display: flex;
+  align-items: center;
+  gap: 0.5ch;
   font-weight: var(--font-weight-medium);
   font-size: var(--text-xl);
   font-family: var(--font-heading);
+}
+
+.information .discounted {
+  color: var(--color-danger);
+  font-size: var(--text-small);
+  text-decoration: line-through;
+}
+
+.information .percentage {
+  padding-inline: 0.5em;
+  padding-block-start: 0.15em;
+  padding-block-end: 0.125em;
+  border-radius: var(--border-rounded);
+  background-color: var(--color-success);
+  color: var(--light-2);
+  font-size: 0.875rem;
+  line-height: 1;
 }
 
 .information .cta {

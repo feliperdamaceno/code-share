@@ -58,6 +58,7 @@ onUnmounted(() => {
             :title="item.title"
             :image="item.image"
             :price="item.price"
+            :discount="item.discount"
             :quantity="item.quantity"
           />
         </li>
@@ -77,8 +78,8 @@ onUnmounted(() => {
           <span>{{ formatPrice({ value: cart.subtotal }) }}</span>
         </li>
 
-        <li class="discount">
-          <span>Discount ({{ cart.discount.percentage }}&#37;)</span>
+        <li v-if="cart.discount.total > 0" class="discount">
+          <span>Discount (&#45;{{ cart.discount.percentage }}&#37;)</span>
           <span>&#45;{{ formatPrice({ value: cart.discount.total }) }}</span>
         </li>
 
@@ -103,7 +104,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-content: start;
   inline-size: 100%;
-  max-inline-size: 500px;
+  max-inline-size: 600px;
   inset: 0;
   left: unset;
   padding-inline: var(--spacing-lg);

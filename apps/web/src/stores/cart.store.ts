@@ -4,7 +4,9 @@ import type { CartProduct } from '@code-share/shared/types/product'
 
 import { defineStore } from 'pinia'
 
-import { useCouponStore } from './coupon.store'
+import { getDiscountAmount } from '@/utils/ecomm'
+
+import { useCouponStore } from '@/stores/coupon.store'
 
 export const useCartStore = defineStore('cart', () => {
   const coupons = useCouponStore()
@@ -18,6 +20,16 @@ export const useCartStore = defineStore('cart', () => {
 
   const subtotal = computed(() => {
     return products.value.reduce((result, product) => {
+      if (hasDiscount(product)) {
+        const discount = getDiscountAmount({
+          price: product.price,
+          discount: product.discount.percentage
+        })
+
+        result += (product.price - discount) * product.quantity
+        return result
+      }
+
       result += product.price * product.quantity
       return result
     }, 0)
@@ -30,7 +42,10 @@ export const useCartStore = defineStore('cart', () => {
 
     return {
       percentage,
-      total: (percentage / 100) * subtotal.value
+      total: getDiscountAmount({
+        price: subtotal.value,
+        discount: percentage
+      })
     }
   })
 
@@ -39,13 +54,13 @@ export const useCartStore = defineStore('cart', () => {
   })
 
   /* actions */
-  function inCart(id: string) {
-    return cart.has(id)
+  function add(product: CartProduct) {
+    if (hasProduct(product.id)) return increase(product.id)
+    cart.set(product.id, product)
   }
 
-  function add(product: CartProduct) {
-    if (inCart(product.id)) return increase(product.id)
-    cart.set(product.id, product)
+  function remove(id: string) {
+    cart.delete(id)
   }
 
   function increase(id: string) {
@@ -60,8 +75,12 @@ export const useCartStore = defineStore('cart', () => {
     cart.set(id, product)
   }
 
-  function remove(id: string) {
-    cart.delete(id)
+  function hasProduct(id: string) {
+    return cart.has(id)
+  }
+
+  function hasDiscount(product: CartProduct) {
+    return product.discount.percentage > 0
   }
 
   return {
@@ -74,7 +93,8 @@ export const useCartStore = defineStore('cart', () => {
     remove,
     increase,
     decrease,
-    inCart
+    hasProduct,
+    hasDiscount
   }
 })
 

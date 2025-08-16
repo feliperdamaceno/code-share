@@ -16,10 +16,20 @@ export type Product = {
   createdAt: number
 }
 
+export type CatalogProduct = {
+  id: string
+  title: string
+  image: string
+  price: number
+  discount: Discount
+  available: boolean
+}
+
 export type CartProduct = {
   id: string
   title: string
   image: string
   price: number
+  discount: Discount
   quantity: number
 }
