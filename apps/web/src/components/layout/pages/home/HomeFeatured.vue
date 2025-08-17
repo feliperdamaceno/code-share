@@ -9,11 +9,11 @@ const catalog = useCatalogStore()
 </script>
 
 <template>
-  <section class="featured-products" id="featured-products">
+  <section id="featured-products-section" class="featured-products">
     <hgroup class="headline">
       <p class="eyebrow">Featured</p>
 
-      <h2 id="featured-products" class="title">
+      <h2 id="featured-products-section" class="title">
         Explore our most popular courses!
       </h2>
     </hgroup>

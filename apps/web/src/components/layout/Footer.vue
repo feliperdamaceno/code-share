@@ -29,13 +29,15 @@ import Button from '@/components/primitives/Button.vue'
 
             <ul class="list" role="list">
               <li>
-                <RouterLink to="#">Discover</RouterLink>
+                <a href="/#introduction-section">Discover</a>
               </li>
+
               <li>
-                <RouterLink to="#">Featured</RouterLink>
+                <a href="/#featured-products-section">Featured</a>
               </li>
+
               <li>
-                <RouterLink to="#">Benefits</RouterLink>
+                <a href="/#benefits-section">Benefits</a>
               </li>
             </ul>
           </div>

@@ -6,7 +6,7 @@ import TruckIcon from '@/assets/icons/truck.svg'
 </script>
 
 <template>
-  <section class="introduction" id="introduction-section">
+  <section id="introduction-section" class="introduction">
     <div class="column">
       <hgroup class="headline">
         <h1 id="introduction-section" class="title">
