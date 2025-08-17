@@ -10,6 +10,7 @@ type Props = {
   placeholder?: string
   label?: string
   size?: Sizes
+  autocomplete?: 'on' | 'off'
   required?: boolean
 }
 
@@ -18,6 +19,7 @@ const {
   placeholder = undefined,
   label = undefined,
   size = undefined,
+  autocomplete = 'off',
   required = false
 } = defineProps<Props>()
 
@@ -52,6 +54,7 @@ const rows = computed(() => {
       :id="name"
       :name="name"
       :placeholder="placeholder"
+      :autocomplete="autocomplete"
       :required="required"
       :rows="rows"
       v-model="value"

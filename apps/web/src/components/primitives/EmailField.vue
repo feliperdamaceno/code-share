@@ -32,14 +32,14 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 </script>
 
 <template>
-  <div class="textfield--base" :class="styles">
+  <div class="email-field--base" :class="styles">
     <label class="label" v-if="hasLabel" :for="name">
       <slot>{{ label }}</slot>
     </label>
 
     <input
       class="input"
-      type="text"
+      type="email"
       :id="name"
       :name="name"
       :placeholder="placeholder"
@@ -52,7 +52,7 @@ const styles: HTMLAttributes['class'] = computed(() => ({
 </template>
 
 <style scoped>
-.textfield--base {
+.email-field--base {
   display: grid;
   inline-size: 100%;
   gap: var(--spacing-sm);
