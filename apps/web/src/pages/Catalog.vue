@@ -31,12 +31,13 @@ const products = useProductStore()
         to explore other options.
       </p>
 
-      <p class="error" v-if="products.error">
+      <p class="error" v-else-if="products.error">
         Ops! Something went wrong while loading our products, please try again
         later.
       </p>
 
       <TransitionGroup
+        v-else
         class="products"
         name="products"
         aria-live="polite"
@@ -47,6 +48,7 @@ const products = useProductStore()
           :key="product.id"
           :id="product.id"
           :title="product.title"
+          :slug="product.slug"
           :image="product.images[0].src"
           :price="product.price"
           :discount="product.discount"

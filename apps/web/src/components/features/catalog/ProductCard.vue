@@ -3,6 +3,8 @@ import { computed, ref } from 'vue'
 
 import type { CatalogProduct } from '@code-share/shared/types/product'
 
+import { RouterLink } from 'vue-router'
+
 import ProductPrice from '@/components/features/catalog/ProductPrice.vue'
 import Button from '@/components/primitives/Button.vue'
 
@@ -15,6 +17,7 @@ const emit = defineEmits<{
 const {
   id = '',
   title = '',
+  slug = '',
   image = '',
   price,
   discount,
@@ -43,12 +46,12 @@ const status = computed(() => {
     />
 
     <div class="information">
-      <div>
+      <RouterLink :to="`products/${slug}`">
         <h3 class="heading" :title="title" aria-hidden="true">
           {{ isLongTitle ? `${title.slice(0, 50)}...` : title }}
         </h3>
         <h3 class="visually-hidden">{{ title }}</h3>
-      </div>
+      </RouterLink>
 
       <ProductPrice :price="price" :discount="discount" />
 
@@ -102,6 +105,10 @@ const status = computed(() => {
   padding-inline: var(--spacing-md);
   padding-block: var(--spacing-md);
   gap: var(--spacing-sm);
+}
+
+.information a {
+  text-decoration: none;
 }
 
 .information .heading {
