@@ -3,9 +3,8 @@ import { ref } from 'vue'
 
 import type { CartProduct } from '@code-share/shared/types/product'
 
+import ProductPrice from '@/components/features/catalog/ProductPrice.vue'
 import Counter from '@/components/primitives/Counter.vue'
-
-import { formatPrice, getDiscountAmount } from '@/utils/ecomm'
 
 import { useCartStore } from '@/stores/cart.store'
 
@@ -23,11 +22,6 @@ const cart = useCartStore()
 
 const invalidSrc = ref<boolean>(false)
 const isLongTitle = title.length >= 40
-
-const discountAmount = getDiscountAmount({
-  price,
-  discount: discount.percentage
-})
 </script>
 
 <template>
@@ -68,19 +62,8 @@ const discountAmount = getDiscountAmount({
           @increment="cart.increase(id)"
           @decrement="cart.decrease(id)"
         />
-        <strong class="price">
-          <span :class="{ discounted: discountAmount > 0 }">
-            {{ formatPrice({ value: price }) }}
-          </span>
 
-          <span v-if="discountAmount > 0">
-            {{ formatPrice({ value: price - discountAmount }) }}
-          </span>
-
-          <span v-if="discount.percentage" class="percentage">
-            &#45;{{ discount.percentage }}&#37;
-          </span>
-        </strong>
+        <ProductPrice :price="price" :discount="discount" />
       </div>
     </div>
   </div>
@@ -175,31 +158,5 @@ const discountAmount = getDiscountAmount({
 
 .trash-icon:hover * {
   color: var(--color-danger);
-}
-
-.information .price {
-  display: flex;
-  align-items: center;
-  gap: 0.5ch;
-  font-weight: var(--font-weight-medium);
-  font-size: var(--text-lg);
-  font-family: var(--font-heading);
-}
-
-.information .discounted {
-  color: var(--color-danger);
-  font-size: var(--text-small);
-  text-decoration: line-through;
-}
-
-.information .percentage {
-  padding-inline: 0.5em;
-  padding-block-start: 0.15em;
-  padding-block-end: 0.125em;
-  border-radius: var(--border-rounded);
-  background-color: var(--color-success);
-  color: var(--light-2);
-  font-size: 0.875rem;
-  line-height: 1;
 }
 </style>
