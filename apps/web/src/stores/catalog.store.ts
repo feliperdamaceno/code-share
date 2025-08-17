@@ -4,6 +4,8 @@ import type { Product } from '@code-share/shared/types/product'
 
 import { defineStore } from 'pinia'
 
+import { getDiscountAmount } from '@/utils/ecomm'
+
 import { useFilterStore } from '@/stores/filter.store'
 import { useProductStore } from '@/stores/product.store'
 
@@ -29,18 +31,25 @@ export const useCatalogStore = defineStore('catalog', () => {
 
     if (!initial) return []
 
-    return initial.filter(byFeatured)
+    return initial.filter((product) => product.featured)
   })
 
   /* private: actions */
   const byPrice = (product: Product) => {
+    const discountAmount = getDiscountAmount({
+      price: product.price,
+      discount: product.discount.percentage
+    })
+
+    const price = product.price - discountAmount
+
     let min = filters.options['price-from']
     let max = filters.options['price-to']
 
     if (min === 0 && max === 0) return true
 
-    if (product.price < min) return false
-    if (product.price > max) return false
+    if (price < min) return false
+    if (price > max) return false
 
     return true
   }

@@ -20,7 +20,7 @@ const catalog = useCatalogStore()
 
     <div class="products">
       <ProductCard
-        v-for="product in catalog.products.slice(0, 3)"
+        v-for="product in catalog.featured.slice(0, 3)"
         :key="product.id"
         :id="product.id"
         :title="product.title"
