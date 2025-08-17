@@ -45,13 +45,15 @@ import Button from '@/components/primitives/Button.vue'
 
             <ul class="list" role="list">
               <li>
-                <RouterLink to="#">Newest</RouterLink>
+                <a href="/catalog?newest=true">Newest</a>
               </li>
+
               <li>
-                <RouterLink to="#">Featured</RouterLink>
+                <a href="/catalog?featured=true">Featured</a>
               </li>
+
               <li>
-                <RouterLink to="#">Catalog</RouterLink>
+                <RouterLink to="/catalog" :replace="true">Catalog</RouterLink>
               </li>
             </ul>
           </div>
@@ -61,13 +63,15 @@ import Button from '@/components/primitives/Button.vue'
 
             <ul class="list" role="list">
               <li>
-                <RouterLink to="#">Instagram</RouterLink>
+                <a href="#">Instagram</a>
               </li>
+
               <li>
-                <RouterLink to="#">Facebook</RouterLink>
+                <a href="#">Facebook</a>
               </li>
+
               <li>
-                <RouterLink to="#">Twitter</RouterLink>
+                <a href="#">Twitter</a>
               </li>
             </ul>
           </div>

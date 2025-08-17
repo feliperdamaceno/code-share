@@ -4,7 +4,7 @@ import ContactForm from '@/components/forms/ContactForm.vue'
 
 <template>
   <section class="container" aria-labelledby="contact-us-title">
-    <div class="col">
+    <div class="column">
       <div class="headline">
         <h2 id="contact-us-title">Contact Us</h2>
 
@@ -17,7 +17,7 @@ import ContactForm from '@/components/forms/ContactForm.vue'
       <img class="chat-image" src="/images/chat.svg" alt="" />
     </div>
 
-    <div class="col">
+    <div class="column">
       <ContactForm />
       <img class="faq-image" src="/images/faq.svg" alt="" />
     </div>
@@ -32,7 +32,7 @@ import ContactForm from '@/components/forms/ContactForm.vue'
   gap: var(--spacing-xl);
 }
 
-.col {
+.column {
   display: grid;
   flex: min(400px, 100%);
   align-content: space-between;

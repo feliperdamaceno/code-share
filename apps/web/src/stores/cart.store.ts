@@ -1,7 +1,8 @@
-import { computed, reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import type { CartProduct } from '@code-share/shared/types/product'
 
+import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
 
 import { getDiscountAmount } from '@/utils/ecomm'
@@ -12,10 +13,16 @@ export const useCartStore = defineStore('cart', () => {
   const coupons = useCouponStore()
 
   /* private: state */
-  const cart = reactive<Map<string, CartProduct>>(new Map())
+  const cart = useStorage<Map<string, CartProduct>>(
+    'cart',
+    new Map(),
+    sessionStorage
+  )
 
   /* getters */
-  const products = computed((): CartProduct[] => Array.from(cart.values()))
+  const products = computed((): CartProduct[] =>
+    Array.from(cart.value.values())
+  )
   const size = computed(() => products.value.length)
 
   const subtotal = computed(() => {
@@ -56,27 +63,27 @@ export const useCartStore = defineStore('cart', () => {
   /* actions */
   function add(product: CartProduct) {
     if (hasProduct(product.id)) return increase(product.id)
-    cart.set(product.id, product)
+    cart.value.set(product.id, product)
   }
 
   function remove(id: string) {
-    cart.delete(id)
+    cart.value.delete(id)
   }
 
   function increase(id: string) {
-    const product = cart.get(id) as CartProduct
+    const product = cart.value.get(id) as CartProduct
     product.quantity += 1
-    cart.set(id, product)
+    cart.value.set(id, product)
   }
 
   function decrease(id: string) {
-    const product = cart.get(id) as CartProduct
+    const product = cart.value.get(id) as CartProduct
     product.quantity -= 1
-    cart.set(id, product)
+    cart.value.set(id, product)
   }
 
   function hasProduct(id: string) {
-    return cart.has(id)
+    return cart.value.has(id)
   }
 
   function hasDiscount(product: CartProduct) {
