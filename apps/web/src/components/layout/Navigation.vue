@@ -33,7 +33,9 @@ const links = routes
           aria-label="open shopping cart"
           @click="sidebar.toggle"
         >
-          <span class="cart-size" aria-hidden="true">{{ cart.size }}</span>
+          <span v-if="cart.size > 0" class="cart-size" aria-hidden="true">
+            {{ cart.size }}
+          </span>
 
           <span
             class="visually-hidden"

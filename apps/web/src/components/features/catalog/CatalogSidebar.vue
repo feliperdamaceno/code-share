@@ -78,7 +78,7 @@ watch(
 
       <div v-else class="categories">
         <Accordion
-          v-for="category in categories.data.get('categories')"
+          v-for="category in categories.data"
           :key="category.id"
           :title="category.name"
           :open="true"

@@ -5,7 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Catalog from '@/pages/Catalog.vue'
 import Contact from '@/pages/Contact.vue'
 import Home from '@/pages/Home.vue'
-import Product from '@/pages/products/Product.vue'
+import Product from '@/pages/Product.vue'
 
 export const routes: RouteRecordRaw[] = [
   {

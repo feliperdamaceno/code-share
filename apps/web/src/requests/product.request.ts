@@ -13,4 +13,19 @@ export class ProductRequest {
       throw error
     }
   }
+
+  static async getProductBySlug(
+    slug: string
+  ): Promise<[Product, null] | [null, Error]> {
+    try {
+      const response = await fetch(`/api/products/${slug}`, { method: 'GET' })
+      const json = (await response.json()) as { data: Product }
+      return [json.data, null]
+    } catch (error) {
+      if (error instanceof Error) {
+        return [null, error]
+      }
+      throw error
+    }
+  }
 }
