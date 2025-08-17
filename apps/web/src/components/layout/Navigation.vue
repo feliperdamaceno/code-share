@@ -33,11 +33,14 @@ const links = routes
           aria-label="open shopping cart"
           @click="sidebar.toggle"
         >
+          <span class="cart-size" aria-hidden="true">{{ cart.size }}</span>
+
           <span
             class="visually-hidden"
-            :aria-label="`cart has ${cart.size} item`"
+            :aria-label="`cart has ${cart.size} items`"
           >
           </span>
+
           <ShoppingBag class="shopping-cart-icon" aria-hidden="true" />
         </button>
       </Transition>
@@ -93,6 +96,7 @@ a:has(.brand) {
 
 .shopping-button {
   display: grid;
+  position: relative;
   place-items: center;
   margin-inline-end: calc(var(--spacing-sm) * -1);
   padding-inline: var(--spacing-sm);
@@ -101,6 +105,21 @@ a:has(.brand) {
   border-radius: var(--border-rounded);
   background-color: transparent;
   cursor: pointer;
+}
+
+.shopping-button .cart-size {
+  display: grid;
+  position: absolute;
+  top: 0;
+  right: 0;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--border-rounded);
+  background-color: var(--color-accent);
+  color: var(--light-2);
+  font-weight: var(--font-weight-medium);
+  font-size: 12px;
 }
 
 .shopping-cart-icon {

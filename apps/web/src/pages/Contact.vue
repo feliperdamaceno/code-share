@@ -5,14 +5,14 @@ import ContactForm from '@/components/forms/ContactForm.vue'
 <template>
   <section class="container" aria-labelledby="contact-us-title">
     <div class="column">
-      <div class="headline">
+      <hgroup class="headline">
         <h2 id="contact-us-title">Contact Us</h2>
 
-        <p class="information">
+        <p class="subtitle">
           Have a question about our products or pricing? Fill in this form to
           get in touch with us.
         </p>
-      </div>
+      </hgroup>
 
       <img class="chat-image" src="/images/chat.svg" alt="" />
     </div>
@@ -28,7 +28,6 @@ import ContactForm from '@/components/forms/ContactForm.vue'
 .container {
   display: flex;
   flex-wrap: wrap;
-  padding-inline: var(--spacing-md);
   gap: var(--spacing-xl);
 }
 
@@ -44,14 +43,13 @@ import ContactForm from '@/components/forms/ContactForm.vue'
   gap: var(--spacing-md);
 }
 
-.headline .information {
+.headline .subtitle {
   color: var(--gray-5);
   font-weight: var(--font-weight-medium);
 }
 
 .chat-image {
   justify-self: start;
-  inline-size: 100%;
   max-inline-size: 500px;
 }
 

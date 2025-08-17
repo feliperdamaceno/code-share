@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue'
 
-import type { CartProduct } from '@code-share/shared/types/product'
+import type { CartProduct, Product } from '@code-share/shared/types/product'
 
 import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
@@ -10,6 +10,7 @@ import { getDiscountAmount } from '@/utils/ecomm'
 import { useCouponStore } from '@/stores/coupon.store'
 
 export const useCartStore = defineStore('cart', () => {
+  const sidebar = useCartSidebarStore()
   const coupons = useCouponStore()
 
   /* private: state */
@@ -61,9 +62,21 @@ export const useCartStore = defineStore('cart', () => {
   })
 
   /* actions */
-  function add(product: CartProduct) {
-    if (hasProduct(product.id)) return increase(product.id)
-    cart.value.set(product.id, product)
+  function add(product: Product) {
+    if (hasProduct(product.id)) {
+      sidebar.open = true
+      return increase(product.id)
+    }
+
+    sidebar.open = true
+    cart.value.set(product.id, {
+      id: product.id,
+      title: product.title,
+      image: product.images[0].src,
+      price: product.price,
+      discount: product.discount,
+      quantity: 1
+    })
   }
 
   function remove(id: string) {

@@ -24,6 +24,14 @@ export const useCatalogStore = defineStore('catalog', () => {
     })
   })
 
+  const featured = computed((): Product[] => {
+    const initial = products.data.get('products')
+
+    if (!initial) return []
+
+    return initial.filter(byFeatured)
+  })
+
   /* private: actions */
   const byPrice = (product: Product) => {
     let min = filters.options['price-from']
@@ -70,5 +78,5 @@ export const useCatalogStore = defineStore('catalog', () => {
     return product.featured
   }
 
-  return { products: filtered }
+  return { products: filtered, featured }
 })

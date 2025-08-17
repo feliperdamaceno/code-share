@@ -16,7 +16,7 @@ onBeforeMount(() => products.load())
 <template>
   <Navigation />
 
-  <main class="content">
+  <main class="page">
     <RouterView />
   </main>
 
@@ -26,9 +26,10 @@ onBeforeMount(() => products.load())
 </template>
 
 <style scoped>
-.content {
+.page {
   display: grid;
   flex: 1;
-  gap: var(--spacing-xl);
+  padding-inline: var(--spacing-md);
+  gap: var(--spacing-2xl);
 }
 </style>

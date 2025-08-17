@@ -1,33 +1,17 @@
 <script setup lang="ts">
-import type { Product } from '@code-share/shared/types/product'
-
 import CatalogSearch from '@/components/features/catalog/CatalogSearch.vue'
 import CatalogSidebar from '@/components/features/catalog/CatalogSidebar.vue'
 import ProductCard from '@/components/features/catalog/ProductCard.vue'
 
-import { useCartSidebarStore, useCartStore } from '@/stores/cart.store'
+import { useCartStore } from '@/stores/cart.store'
 import { useCatalogStore } from '@/stores/catalog.store'
 import { useProductStore } from '@/stores/product.store'
 
 import LoadingIcon from '@/assets/icons/loading.svg'
 
-const sidebar = useCartSidebarStore()
 const cart = useCartStore()
-const products = useProductStore()
 const catalog = useCatalogStore()
-
-function addToCart(product: Product) {
-  cart.add({
-    id: product.id,
-    title: product.title,
-    image: product.images[0].src,
-    price: product.price,
-    discount: product.discount,
-    quantity: 1
-  })
-
-  sidebar.open = true
-}
+const products = useProductStore()
 </script>
 
 <template>
@@ -67,7 +51,7 @@ function addToCart(product: Product) {
           :price="product.price"
           :discount="product.discount"
           :available="product.available"
-          @add-to-cart="addToCart(product)"
+          @add-to-cart="cart.add(product)"
         />
       </TransitionGroup>
     </div>

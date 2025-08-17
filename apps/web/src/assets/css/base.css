@@ -74,7 +74,7 @@
     1fr
     min(var(--app-container), calc(100% - var(--spacing-md) * 2))
     1fr;
-  row-gap: var(--spacing-xl);
+  row-gap: var(--spacing-2xl);
   align-content: stretch;
   align-items: start;
   min-height: 100vh;

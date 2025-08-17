@@ -1,9 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HomeFeatured from '@/components/layout/pages/home/HomeFeatured.vue'
+import HomeIntro from '@/components/layout/pages/home/HomeIntro.vue'
+</script>
 
 <template>
-  <section>
-    <h2>Home</h2>
-  </section>
+  <HomeIntro />
+  <HomeFeatured />
 </template>
-
-<style scoped></style>
