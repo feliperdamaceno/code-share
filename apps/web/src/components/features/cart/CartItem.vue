@@ -135,10 +135,17 @@ const isLongTitle = title.length >= 40
   text-decoration: none;
 }
 
+.information a:hover .heading {
+  color: var(--color-accent-on-hover);
+}
+
 .information .heading {
   font-weight: var(--font-weight-medium);
   font-size: var(--text-md);
   text-wrap: pretty;
+  transition-duration: 125ms;
+  transition-property: color;
+  transition-timing-function: ease;
 }
 
 .delete-button {

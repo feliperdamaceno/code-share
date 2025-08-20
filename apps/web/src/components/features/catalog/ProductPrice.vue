@@ -15,19 +15,22 @@ const discountAmount = getDiscountAmount({
 </script>
 
 <template>
-  <strong class="price">
-    <span :class="{ discounted: discountAmount > 0 }">
+  <div class="price">
+    <span
+      :class="{ discounted: discountAmount > 0 }"
+      aria-label="original price"
+    >
       {{ formatPrice({ value: price }) }}
     </span>
 
-    <span v-if="discountAmount > 0">
+    <span v-if="discountAmount > 0" aria-label="current price">
       {{ formatPrice({ value: price - discountAmount }) }}
     </span>
 
-    <span v-if="discount.percentage" class="percentage">
+    <span v-if="discount.percentage" class="percentage" aria-label="discount">
       &#45;{{ discount.percentage }}&#37;
     </span>
-  </strong>
+  </div>
 </template>
 
 <style scoped>

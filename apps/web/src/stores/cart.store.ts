@@ -80,6 +80,11 @@ export const useCartStore = defineStore('cart', () => {
     })
   }
 
+  function read(id: string) {
+    if (hasProduct(id) === false) return null
+    return cart.value.get(id) as CartProduct
+  }
+
   function remove(id: string) {
     cart.value.delete(id)
   }
@@ -111,6 +116,7 @@ export const useCartStore = defineStore('cart', () => {
     discount,
     total,
     add,
+    read,
     remove,
     increase,
     decrease,

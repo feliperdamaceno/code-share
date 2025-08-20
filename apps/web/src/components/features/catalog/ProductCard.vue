@@ -111,9 +111,16 @@ const status = computed(() => {
   text-decoration: none;
 }
 
+.information a:hover .heading {
+  color: var(--color-accent-on-hover);
+}
+
 .information .heading {
   font-size: var(--text-lg);
   text-wrap: pretty;
+  transition-duration: 125ms;
+  transition-property: color;
+  transition-timing-function: ease;
 }
 
 .information .cta {
