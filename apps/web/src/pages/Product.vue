@@ -6,6 +6,7 @@ import type { Product } from '@code-share/shared/types/product'
 import { useRoute } from 'vue-router'
 
 import ImageCarousel from '@/components/features/product/ImageCarousel.vue'
+import ProductsFeatured from '@/components/layout/pages/product/ProductsFeatured.vue'
 import Button from '@/components/primitives/Button.vue'
 import Pill from '@/components/primitives/Pill.vue'
 
@@ -123,6 +124,8 @@ const discountAmount = computed(() => {
       </div>
     </div>
   </section>
+
+  <ProductsFeatured />
 </template>
 
 <style scoped>
