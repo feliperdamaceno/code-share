@@ -29,7 +29,6 @@ export type CatalogProduct = {
 export type CartProduct = {
   id: string
   title: string
-  slug: string
   image: string
   price: number
   discount: Discount

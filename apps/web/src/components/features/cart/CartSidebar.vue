@@ -56,7 +56,6 @@ onUnmounted(() => {
             :key="item.id"
             :id="item.id"
             :title="item.title"
-            :slug="item.slug"
             :image="item.image"
             :price="item.price"
             :discount="item.discount"

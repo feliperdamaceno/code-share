@@ -72,7 +72,6 @@ export const useCartStore = defineStore('cart', () => {
     cart.value.set(product.id, {
       id: product.id,
       title: product.title,
-      slug: product.slug,
       image: product.images[0].src,
       price: product.price,
       discount: product.discount,

@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 import type { CatalogProduct } from '@code-share/shared/types/product'
-
-import { RouterLink } from 'vue-router'
 
 import ProductPrice from '@/components/features/catalog/ProductPrice.vue'
 import Button from '@/components/primitives/Button.vue'
@@ -46,12 +44,12 @@ const status = computed(() => {
     <img class="asset" :src="image" alt="" aria-hidden="true" />
 
     <div class="information">
-      <RouterLink :to="`products/${slug}`">
+      <a :href="`/products/${slug}`">
         <h3 class="heading" :title="title" aria-hidden="true">
           {{ isLongTitle ? `${title.slice(0, 50)}...` : title }}
         </h3>
         <h3 class="visually-hidden">{{ title }}</h3>
-      </RouterLink>
+      </a>
 
       <ProductPrice :price="price" :discount="discount" />
 

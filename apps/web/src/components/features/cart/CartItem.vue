@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 import type { CartProduct } from '@code-share/shared/types/product'
-
-import { RouterLink } from 'vue-router'
 
 import ProductPrice from '@/components/features/catalog/ProductPrice.vue'
 import Counter from '@/components/primitives/Counter.vue'
@@ -15,7 +11,6 @@ import TrashIcon from '@/assets/icons/trash.svg'
 const {
   id = '',
   title = '',
-  slug = '',
   image = '',
   price,
   discount
@@ -32,12 +27,10 @@ const isLongTitle = title.length >= 40
 
     <div class="information">
       <div class="row">
-        <RouterLink :to="`products/${slug}`">
-          <h3 class="heading" :title="title" aria-hidden="true">
-            {{ isLongTitle ? `${title.slice(0, 40)}...` : title }}
-          </h3>
-          <h3 class="visually-hidden">{{ title }}</h3>
-        </RouterLink>
+        <h3 class="heading" :title="title" aria-hidden="true">
+          {{ isLongTitle ? `${title.slice(0, 40)}...` : title }}
+        </h3>
+        <h3 class="visually-hidden">{{ title }}</h3>
 
         <button
           class="delete-button"
@@ -121,14 +114,6 @@ const isLongTitle = title.length >= 40
 
 .information .row:last-of-type {
   align-items: baseline;
-}
-
-.information a {
-  text-decoration: none;
-}
-
-.information a:hover .heading {
-  color: var(--color-accent-on-hover);
 }
 
 .information .heading {
