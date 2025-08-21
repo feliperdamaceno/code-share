@@ -4,6 +4,7 @@ import { onBeforeMount } from 'vue'
 import CartSidebarController from '@/components/features/cart/CartSidebarController.vue'
 import Footer from '@/components/layout/Footer.vue'
 import Navigation from '@/components/layout/Navigation.vue'
+import SkipToMainContent from '@/components/layout/SkipToMainContent.vue'
 
 import { useProductStore } from '@/stores/product.store'
 
@@ -14,9 +15,11 @@ onBeforeMount(() => products.load())
 </script>
 
 <template>
+  <SkipToMainContent />
+
   <Navigation />
 
-  <main class="page">
+  <main id="main-content" class="page">
     <RouterView />
   </main>
 
