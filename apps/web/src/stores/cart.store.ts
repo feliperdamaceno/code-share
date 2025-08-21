@@ -21,9 +21,9 @@ export const useCartStore = defineStore('cart', () => {
   )
 
   /* getters */
-  const products = computed((): CartProduct[] =>
-    Array.from(cart.value.values())
-  )
+  const products = computed((): CartProduct[] => {
+    return Array.from(cart.value.values())
+  })
   const size = computed(() => products.value.length)
 
   const subtotal = computed(() => {
