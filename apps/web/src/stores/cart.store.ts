@@ -65,7 +65,7 @@ export const useCartStore = defineStore('cart', () => {
   function add(product: Product) {
     if (hasProduct(product.id)) {
       sidebar.open = true
-      return increase(product.id)
+      return
     }
 
     sidebar.open = true

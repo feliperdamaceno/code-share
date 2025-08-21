@@ -26,24 +26,24 @@ const {
 
 const cart = useCartStore()
 
-const invalidSrc = ref<boolean>(false)
 const isLongTitle = title.length >= 50
 
 const status = computed(() => {
-  return available ? 'Add to Cart' : 'Out of Stock'
+  if (available === false) {
+    return 'Out of Stock'
+  }
+
+  if (cart.hasProduct(id)) {
+    return 'In Cart'
+  }
+
+  return 'Add to Cart'
 })
 </script>
 
 <template>
   <div class="card">
-    <img
-      class="asset"
-      :class="{ invalid: invalidSrc }"
-      :src="image"
-      alt=""
-      aria-hidden="true"
-      @error="invalidSrc = true"
-    />
+    <img class="asset" :src="image" alt="" aria-hidden="true" />
 
     <div class="information">
       <RouterLink :to="`products/${slug}`">
@@ -91,7 +91,7 @@ const status = computed(() => {
   background-color: var(--dark-6);
 }
 
-.asset.invalid::before {
+.asset::before {
   position: absolute;
   inset: 0;
   background-color: inherit;

@@ -5,8 +5,8 @@ import type { Product } from '@code-share/shared/types/product'
 
 import { useRoute } from 'vue-router'
 
+import ImageCarousel from '@/components/features/product/ImageCarousel.vue'
 import Button from '@/components/primitives/Button.vue'
-import Counter from '@/components/primitives/Counter.vue'
 import Pill from '@/components/primitives/Pill.vue'
 
 import { formatPrice, getDiscountAmount } from '@/utils/ecomm'
@@ -18,6 +18,7 @@ import { useAsyncQuery } from '@/composables/useAsyncQuery'
 import { ProductRequest } from '@/requests/product.request'
 
 const route = useRoute()
+
 const slug = Array.isArray(route.params.slug)
   ? route.params.slug[0]
   : route.params.slug
@@ -36,15 +37,23 @@ onBeforeMount(async () => await load())
 const cart = useCartStore()
 
 const status = computed(() => {
-  return product.value.available ? 'Add to Cart' : 'Out of Stock'
+  if (product.value.available === false) {
+    return 'Out of Stock'
+  }
+
+  if (cart.hasProduct(product.value.id)) {
+    return 'In Cart'
+  }
+
+  return 'Add to Cart'
 })
 
-const discountAmount = computed(() =>
-  getDiscountAmount({
+const discountAmount = computed(() => {
+  return getDiscountAmount({
     price: product.value.price,
     discount: product.value.discount.percentage
   })
-)
+})
 </script>
 
 <template>
@@ -58,13 +67,7 @@ const discountAmount = computed(() =>
 
     <div class="product" v-else>
       <div class="column">
-        <img
-          :src="product.images[0].src"
-          :alt="product.images[0].alt"
-          :width="product.images[0].width"
-          :height="product.images[0].height"
-          :key="product.images[0].id"
-        />
+        <ImageCarousel :name="product.slug" :images="product.images" />
       </div>
 
       <div class="column">
@@ -102,25 +105,15 @@ const discountAmount = computed(() =>
           </p>
         </div>
 
-        <div class="actions">
-          <Counter
-            :min="1"
-            :max="99"
-            :initial="cart.read(product.id)?.quantity"
-            aria-label="product quantity selector"
-            @increment="cart.increase(product.id)"
-            @decrement="cart.decrease(product.id)"
-          />
-
-          <Button
-            variant="accent"
-            :disabled="!product.available"
-            :aria-pressed="cart.hasProduct(product.id)"
-            @click="cart.add(product)"
-          >
-            {{ status }}
-          </Button>
-        </div>
+        <Button
+          variant="accent"
+          size="large"
+          :disabled="!product.available"
+          :aria-pressed="cart.hasProduct(product.id)"
+          @click="cart.add(product)"
+        >
+          {{ status }}
+        </Button>
 
         <div class="categories" aria-label="product categories">
           <Pill v-for="category in product.categories" :key="category.id">
@@ -195,7 +188,7 @@ const discountAmount = computed(() =>
   text-decoration: line-through;
 }
 
-:is(.actions, .categories) {
+.categories {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-md);

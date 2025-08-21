@@ -23,20 +23,12 @@ const {
 
 const cart = useCartStore()
 
-const invalidSrc = ref<boolean>(false)
 const isLongTitle = title.length >= 40
 </script>
 
 <template>
   <div class="cart-item" aria-label="cart item">
-    <img
-      class="asset"
-      :class="{ invalid: invalidSrc }"
-      :src="image"
-      alt=""
-      aria-hidden="true"
-      @error="invalidSrc = true"
-    />
+    <img class="asset" :src="image" alt="" aria-hidden="true" />
 
     <div class="information">
       <div class="row">
@@ -90,7 +82,7 @@ const isLongTitle = title.length >= 40
   background-color: var(--dark-6);
 }
 
-.asset.invalid::before {
+.asset::before {
   position: absolute;
   inset: 0;
   background-color: inherit;
