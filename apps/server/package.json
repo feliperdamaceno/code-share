@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch cmd/main.ts",
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 2 mock/images/**/* dist/mock/images",
     "start": "node dist/cmd/main.js"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
     "@code-share/shared": "workspace:*",
     "@ianvs/prettier-plugin-sort-imports": "^4.5.1",
     "@types/node": "^20.11.17",
+    "copyfiles": "^2.4.1",
     "prettier": "^3.6.2",
     "tsx": "^4.7.1",
     "typescript": "~5.8.3"
