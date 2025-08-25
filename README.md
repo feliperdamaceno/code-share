@@ -1,90 +1,56 @@
-# Code Share
+## Code Share
 
-This project is a full-featured e-commerce catalog experience built as a
-portfolio project to showcase modern web architecture, thoughtful UX, and robust
-backend interaction. The project demonstrates a complete shopping flow,
-including catalog browsing, persistent filters, cart calculation, and coupon
-support — all powered by a scalable and maintainable Vue.js codebase.
+The project is a full-featured e-commerce catalog built to showcase modern web
+architecture, thoughtful UX, and robust backend integration. It demonstrates a
+complete shopping experience, including catalog browsing, filtering, cart
+management, and coupon application — all powered by a scalable Vue.js + Pinia
+codebase.
 
 ## Architecture and Decisions
 
-- **Monorepo Structure**:
+This project is structured as a monorepo for maintainability and code reuse:
 
-  - `shared/`: All shared types and utilities.
-  - `web/`: The main frontend application (Vue + Pinia).
-  - `server/`: Backend API, also used for deployment and serving mock data.
+- `shared/`: shared types and utilities across frontend and backend.
+- `web/`: main frontend application (Vue + Pinia).
+- `server/`: backend API serving catalog, cart, and coupon data; also used for
+  mock data during development.
 
-- **Backend**:
+**Backend:**
 
-  - Serves as both the API for the frontend and the deployment target.
-  - Provides all catalog, cart, and coupon data via REST endpoints.
-  - Mock data is used for demo and testing purposes.
+- Provides REST endpoints for products, categories, and coupon validation.
+- Includes mock data for realistic testing without external dependencies.
 
-- **Frontend**:
+**Frontend:**
 
-  - Built with [Vue](https://vuejs.org/) and [Pinia](https://pinia.vuejs.org/)
-    for fast, modern, and interactive UI.
-  - All API calls are handled via a dedicated `requests/` service layer and
-    custom composables like `useAsyncQuery`.
-  - Centralized state management using Pinia with support for both synchronous
-    and asynchronous operations.
-  - State is persisted in session storage to maintain app context across page
-    reloads.
-  - Catalog filters are stored in query parameters, making filter states
-    shareable via URL.
-  - Cart handles all price calculations including subtotal, total, discounts,
-    and coupon support.
-  - Fully WCAG-compliant: keyboard navigable, proper ARIA attributes, and
-    semantic HTML used throughout.
+- Built with Vue and Pinia for reactive state management.
+- API calls handled via a dedicated `requests/` service layer.
+- State persisted in session storage; catalog filters reflected in the URL for
+  shareable links.
+- Cart handles all calculations client-side, including subtotal, total,
+  discounts, and coupon support.
+- Fully WCAG-compliant with semantic HTML and keyboard navigation.
 
-- **Design System**:
+**Design System:**
 
-  - Custom Figma design system created specifically for this project.
-  - CSS variables are used for theme consistency; Figma tokens match the
-    codebase for seamless handoff.
-  - Figma Project:
-    [**Code Share**](https://www.figma.com/design/ZplsoLMwCMqE1UExwZltzn/Code-Share?m=auto&t=DHNGTbTkR7C2B3ek-1)
+- Custom Figma-based design system to ensure consistent styling.
+- CSS variables match Figma tokens for seamless handoff.
+- [Figma Project](https://www.figma.com/design/ZplsoLMwCMqE1UExwZltzn/Code-Share?m=autoandt=DHNGTbTkR7C2B3ek-1)
 
-- **State and UX**:
-  - Cart and catalog state are managed on the client, with calculations (totals,
-    discounts) performed in the browser for instant feedback.
-  - All catalog and cart actions are reflected in the URL and UI, supporting
-    deep linking and shareability.
+## Features and API
 
-## Features
+- **Catalog:** Browse, filter, search products; shareable URLs persist state.
+- **Cart and Checkout:** Add/remove items, update quantities, see real-time
+  totals, validate coupons.
+- **API Endpoints:**
 
-- **Full Catalog Experience**:
+  - `GET /api/products` – list all products
+  - `GET /api/products/<slug>` – get a product by slug
+  - `GET /api/categories` – list all categories
+  - `POST /api/coupons/validate` – validate and apply coupon
 
-  - Browse, filter, and search products with persistent queries.
-  - Shareable URLs reflect current filters and search state.
+- **Mock Backend:** All data served from the backend for testing and demos.
 
-- **Cart and Checkout**:
-
-  - Add/remove items, update quantities, and see real-time totals.
-  - Coupon code support with validation and discount calculation.
-
-- **Mock Backend**:
-
-  - All data (products, coupons, etc.) is served from the backend for realistic
-    testing and deployment.
-
-## Server API Endpoints
-
-- `GET /api/products`  
-  Returns all available products.
-
-- `GET /api/products/<slug>`  
-  Returns a product by slug.
-
-- `GET /api/categories`  
-  Returns a list of all product categories.
-
-- `POST /api/coupons/validate`  
-  Validates and applies a coupon code to the cart.
-
-## Coupon Codes (for testing)
-
-The following coupon codes are available for testing discount logic in cart:
+**Test Coupons:**
 
 - `HELLOWORLD` – 10% off
 - `BYTEWISE10` – 10% off
@@ -92,47 +58,51 @@ The following coupon codes are available for testing discount logic in cart:
 
 ## Running the Project
 
-1. **Install PNPM** (if not installed):
+**1. Install PNPM (if needed):**
 
-   ```bash
-   npm install -g pnpm@latest
-   ```
+```bash
+npm install -g pnpm@latest
+```
 
-   [https://pnpm.io/installation](https://pnpm.io/installation)
+**2. Install dependencies:**
 
-2. **Install dependencies**:
+```bash
+pnpm install
+```
 
-   ```bash
-   pnpm install
-   ```
+**3. Start development environment:**
 
-3. **Start the application**:
+```bash
+make dev
+```
 
-   ```bash
-   make dev
-   ```
-
-   This command will start the frontend and backend, as well as listen for
-   changes in the shared package.
-
-4. **Open your browser** at [http://localhost:3000](http://localhost:3000) (or
-   the port shown in the terminal).
+Open your browser at [http://localhost:3000](http://localhost:3000).
 
 ## Deployment
 
-**TBD**
+This project is containerized with Docker and runs anywhere Docker is supported.
+
+**1. Build the Docker image**:
+
+```bash
+docker build -t code-share .
+```
+
+**2. Run the container**:
+
+```bash
+docker run -p 3000:3000 code-share
+```
+
+All static assets and mock data are included in the Docker image.
 
 ## Why This Architecture?
 
-- **Monorepo**: Simplifies code sharing and type safety across backend and
-  frontend.
-- **Persistent Queries**: Improves UX by making catalog state shareable and
-  bookmarkable.
-- **Mock Backend**: Enables rapid prototyping and easy deployment without
-  external dependencies.
-- **Custom Design System**: Ensures visual consistency and efficient handoff
-  between design and development.
-- **Service Layer**: Keeps data fetching logic organized and testable.
+- **Monorepo:** Simplifies code sharing and ensures type safety.
+- **Persistent Queries:** Makes catalog state shareable and bookmarkable.
+- **Mock Backend:** Enables fast prototyping without external dependencies.
+- **Custom Design System:** Ensures consistent UI and smooth handoff.
+- **Service Layer:** Keeps API calls organized and testable.
 
 ## Licence
 
