@@ -91,7 +91,7 @@ docker build -t code-share .
 **2. Run the container**:
 
 ```bash
-docker run -p 3000:3000 code-share
+docker run -p 4000:3000 code-share
 ```
 
 All static assets and mock data are included in the Docker image.
